@@ -1,0 +1,15 @@
+{
+  "name": "lucky-defense-web",
+  "version": "19.0.0",
+  "private": true,
+  "description": "LUCKY DEFENSE - public web deployment build",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}
