@@ -214,8 +214,16 @@ const handler = async(req,res)=>{
     catch(e){ return json(res,500,{error:'ranking unavailable'}); }
   }
   if(req.method === 'POST' && u.pathname === '/api/score'){
-    try{ return json(res,200,await submitScore(await body(req))); }
-    catch(e){ return json(res,400,{error:e.message || 'bad request'}); }
+    try{
+      const payload = await body(req);
+      if(!payload || typeof payload !== 'object' || Array.isArray(payload)) return json(res,422,{ok:false,error:'invalid JSON payload'});
+      return json(res,200,await submitScore(payload));
+    }catch(e){
+      const msg=e?.message || 'score submission failed';
+      console.error('❌ /api/score failed:',msg);
+      const code = /영구 랭킹 DB|PostgreSQL|DATABASE_URL|ECONN|timeout|connection/i.test(msg) ? 503 : (/invalid JSON|invalid score/i.test(msg) ? 422 : 500);
+      return json(res,code,{ok:false,error:msg});
+    }
   }
 
   let rel = u.pathname === '/' ? 'index.html' : decodeURIComponent(u.pathname.replace(/^\//,''));

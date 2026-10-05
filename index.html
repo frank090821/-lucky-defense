@@ -723,8 +723,35 @@ async function fetchRanking(){const r=await fetch('/api/ranking?playerId='+encod
 async function openRank(){openModal('🏆 LUCKY DEFENSE 서버 랭킹','<div class="rankEmpty">랭킹 데이터를 불러오는 중...</div>');try{const d=await fetchRanking();const rows=d.ranking||[];const top=[rows[1],rows[0],rows[2]].filter(Boolean);const podium=top.length?top.map((s,j)=>{const actual=j===0?1:j===1?0:2;return {s,actual}}).sort((a,b)=>a.actual-b.actual).map(({s,actual})=>`<div class="rankPodium ${actual===0?'first':actual===1?'second':'third'}"><div class="rankMedal">${rankMedal(actual)}</div><div class="place">#${actual+1}</div><div class="pname">${escapeHtml(s.name)}${s.playerId===PLAYER_ID?' · YOU':''}</div><div class="pscore">${Number(s.score).toLocaleString()}</div><div class="pmeta">${s.stage} STAGE · ${Number(s.kills).toLocaleString()} KILL</div></div>`).join(''):'<div class="rankEmpty">아직 기록이 없습니다.</div>';
 const my=d.myBest;const summary=`<div class="rankSummary"><div class="rankStat"><span>내 순위</span><b>${d.myRank?'#'+d.myRank:'-'}</b></div><div class="rankStat"><span>내 최고 점수</span><b>${my?Number(my.score).toLocaleString():'-'}</b></div><div class="rankStat"><span>최고 스테이지</span><b>${my?my.stage:'-'}</b></div><div class="rankStat"><span>플레이 횟수</span><b>${my?my.games:0}</b></div></div>`;
 const body=`<div class="rankHero">${podium}</div>${summary}<div class="rankFilter"><span class="rankTag">🏆 TOP 100</span><span class="rankTag">LIVE SERVER</span><button class="rankRefresh" onclick="openRank()">↻ 새로고침</button></div><div class="rankTable"><div class="rankTableHead"><span>순위</span><span>플레이어</span><span>점수</span><span>스테이지</span><span>킬</span></div>${rows.length?rows.map((s,i)=>`<div class="rankTableRow ${s.playerId===PLAYER_ID?'me':''}"><span class="rnum">${rankMedal(i)||i+1}</span><span class="rname">${escapeHtml(s.name)}${s.playerId===PLAYER_ID?' <b>· YOU</b>':''}<small>${rankTime(s.time)} · ${s.games||1}회 플레이</small></span><span class="rscore">${Number(s.score).toLocaleString()}</span><span class="rmeta">${s.stage}</span><span class="rmeta">${Number(s.kills).toLocaleString()}</span></div>`).join(''):'<div class="rankEmpty">아직 기록이 없습니다.</div>'}</div><div class="rankModalFoot"><span>동일 플레이어는 최고 기록 1개만 표시됩니다.</span><span>${d.totalPlayers||0}명 등록</span></div>`;document.getElementById('modalBody').innerHTML=body}catch(e){document.getElementById('modalBody').innerHTML='<div class="rankEmpty">랭킹 서버에 연결할 수 없습니다.<br>게임 서버가 실행 중인지 확인해주세요.</div>'}}
-async function submitScore(){savePlayerName();const payload={playerId:PLAYER_ID,name:getPlayerName(),score,stage,kills};try{const r=await fetch('/api/score',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(x=>x.json());if(r.ok){notify(r.isNewBest?'🏆 최고 기록 갱신! 현재 #'+r.rank+'위':'📊 기록 저장 완료 · 현재 #'+r.rank+'위');renderMiniRanking(r);safeSet('lucky_best',JSON.stringify({name:getPlayerName(),score,stage,kills,rank:r.rank}))}}catch(e){safeSet('lucky_best',JSON.stringify({name:getPlayerName(),score,stage,kills}));notify('📡 서버 연결 실패 · 기기 기록은 저장했습니다.')}}
-function gameOver(){running=false;paused=false;document.getElementById('ovTitle').textContent='GAME OVER';document.getElementById('ovText').innerHTML=`${stage} 스테이지 · ${score.toLocaleString()}점 · ${kills}킬<br><small>최고 기록을 랭킹에 제출합니다.</small>`;document.getElementById('ovBtn').textContent='🔄 다시 시작';document.getElementById('overlay').style.display='flex';submitScore();updateButtons()}
+let scoreSubmitting=false;
+async function submitScore(){
+  if(scoreSubmitting)return;
+  scoreSubmitting=true;
+  savePlayerName();
+  const payload={playerId:String(PLAYER_ID||''),name:getPlayerName(),score:Number(score)||0,stage:Number(stage)||0,kills:Number(kills)||0};
+  try{
+    const response=await fetch('/api/score',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),cache:'no-store'});
+    const r=await response.json().catch(()=>({}));
+    if(!response.ok || !r.ok) throw new Error(r.error||`점수 등록 실패 (${response.status})`);
+    notify(r.isNewBest?'🏆 최고 기록 갱신! 현재 #'+r.rank+'위':'📊 기록 저장 완료 · 현재 #'+r.rank+'위');
+    renderMiniRanking(r);
+    safeSet('lucky_best',JSON.stringify({...payload,rank:r.rank}));
+  }catch(e){
+    console.error('submitScore failed:',e,payload);
+    safeSet('lucky_best',JSON.stringify(payload));
+    notify('⚠️ 점수 등록 실패: '+(e?.message||'알 수 없는 오류'));
+  }finally{scoreSubmitting=false}
+}
+function gameOver(){
+  if(gameOverSent)return;
+  gameOverSent=true;
+  running=false;paused=false;
+  document.getElementById('ovTitle').textContent='GAME OVER';
+  document.getElementById('ovText').innerHTML=`${stage} 스테이지 · ${score.toLocaleString()}점 · ${kills}킬<br><small>최고 기록을 랭킹에 제출합니다.</small>`;
+  document.getElementById('ovBtn').textContent='🔄 다시 시작';
+  document.getElementById('overlay').style.display='flex';
+  submitScore();updateButtons()
+}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 document.getElementById('name').addEventListener('input',savePlayerName);fetchRanking().catch(()=>renderMiniRanking({ranking:[]}));setInterval(()=>{if(!document.getElementById('modal').hidden)return;fetchRanking().catch(()=>{})},15000);
 c.addEventListener('click',e=>{const r=c.getBoundingClientRect();const x=(e.clientX-r.left)*c.width/r.width,y=(e.clientY-r.top)*c.height/r.height;const hit=towers.slice().reverse().find(t=>Math.hypot(t.x-x,t.y-y)<30);if(sellMode){if(hit){selectedTower=hit;sellSelected()}else notify('💰 판매 모드: 판매할 타워를 클릭하세요.');return}if(selected){placeTower(selected.name,x,y,selected.level);return}if(hit){selectedTower=hit;notify('🎯 '+TKR[hit.name]+' Lv.'+hit.level);updateUI();return}selectedTower=null;updateUI()});
