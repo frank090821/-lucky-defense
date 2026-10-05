@@ -18,12 +18,17 @@ function cleanPlayerId(v){
 function scoreNumber(v, max){
   return Math.max(0, Math.min(max, Math.floor(Number(v) || 0)));
 }
-function betterThan(a, b){
-  if(!a) return true;
-  return a.score < b.score || (a.score === b.score && (a.stage < b.stage || (a.stage === b.stage && a.kills < b.kills)));
+function betterThan(oldBest, candidate){
+  if(!oldBest) return true;
+  return candidate.score > oldBest.score ||
+    (candidate.score === oldBest.score && (candidate.stage > oldBest.stage ||
+      (candidate.stage === oldBest.stage && candidate.kills > oldBest.kills)));
 }
 function sortScores(a){
   return a.sort((x,y) => y.score - x.score || y.stage - x.stage || y.kills - x.kills || (x.time || 0) - (y.time || 0));
+}
+function rankedRows(rows){
+  return rows.map((row, i) => ({...row, rank:i+1}));
 }
 function normalizeScore(raw){
   return {
@@ -81,15 +86,17 @@ async function getRanking(playerId=''){
   if(pgPool){
     const { rows } = await pgPool.query(`SELECT player_id AS "playerId", name, score::text AS score, stage, kills, time, games FROM lucky_scores ORDER BY score DESC, stage DESC, kills DESC, time ASC`);
     const ranking = rows.map(normalizeScore);
+    const ranked = rankedRows(ranking);
     const idx = cleanPlayerId(playerId) ? ranking.findIndex(x => x.playerId === cleanPlayerId(playerId)) : -1;
     const mine = idx >= 0 ? ranking[idx] : null;
-    return { ranking: ranking.slice(0,100), totalPlayers: ranking.length, myRank: idx >= 0 ? idx + 1 : null, myBest: mine ? {name:mine.name,score:mine.score,stage:mine.stage,kills:mine.kills,games:mine.games,time:mine.time} : null, updatedAt: Date.now() };
+    return { ranking: ranked.slice(0,100), totalPlayers: ranking.length, myRank: idx >= 0 ? idx + 1 : null, myBest: mine ? {name:mine.name,score:mine.score,stage:mine.stage,kills:mine.kills,games:mine.games,time:mine.time} : null, updatedAt: Date.now() };
   }
   const ranking = sortScores(readFileScores());
+  const ranked = rankedRows(ranking);
   const id = cleanPlayerId(playerId);
   const idx = id ? ranking.findIndex(x => x.playerId === id) : -1;
   const mine = idx >= 0 ? ranking[idx] : null;
-  return { ranking: ranking.slice(0,100), totalPlayers: ranking.length, myRank: idx >= 0 ? idx + 1 : null, myBest: mine ? {name:mine.name,score:mine.score,stage:mine.stage,kills:mine.kills,games:mine.games,time:mine.time} : null, updatedAt: Date.now() };
+  return { ranking: ranked.slice(0,100), totalPlayers: ranking.length, myRank: idx >= 0 ? idx + 1 : null, myBest: mine ? {name:mine.name,score:mine.score,stage:mine.stage,kills:mine.kills,games:mine.games,time:mine.time} : null, updatedAt: Date.now() };
 }
 
 async function submitScore(x){
