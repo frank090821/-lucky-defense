@@ -143,7 +143,7 @@ async function submitScore(x){
     old = q.rows[0] ? normalizeScore(q.rows[0]) : null;
     const isNewBest = betterThan(old, candidate);
     if(!old){
-      await pgPool.query(`INSERT INTO lucky_scores(player_id,name,score,stage,kills,time,games) VALUES($1,$2,$3,$4,$5,$6,1,NOW())`, [playerId,candidate.name,candidate.score,candidate.stage,candidate.kills,candidate.time]);
+      await pgPool.query(`INSERT INTO lucky_scores(player_id,name,score,stage,kills,time,games) VALUES($1,$2,$3,$4,$5,$6,$7)`, [playerId,candidate.name,candidate.score,candidate.stage,candidate.kills,candidate.time,1]);
     }else if(isNewBest){
       await pgPool.query(`UPDATE lucky_scores SET name=$2,score=$3,stage=$4,kills=$5,time=$6,games=$7,updated_at=NOW() WHERE player_id=$1`, [playerId,candidate.name,candidate.score,candidate.stage,candidate.kills,candidate.time,old.games+1]);
     }else{
