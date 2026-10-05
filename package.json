@@ -1,8 +1,8 @@
 {
   "name": "lucky-defense-web",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "private": true,
-  "description": "LUCKY DEFENSE - public web deployment build",
+  "description": "LUCKY DEFENSE - public web deployment build · character art edition",
   "scripts": {
     "start": "node server.js"
   },
