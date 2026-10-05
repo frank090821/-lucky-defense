@@ -135,7 +135,7 @@ async function submitScore(x){
     time: Date.now(),
     games: 1
   };
-  if(!candidate.score || !candidate.stage) throw new Error('invalid score');
+  if(candidate.score < 0 || candidate.stage < 0 || candidate.kills < 0) throw new Error('invalid score');
 
   let old = null;
   if(pgPool){
