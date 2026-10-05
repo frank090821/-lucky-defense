@@ -41,3 +41,15 @@ Render가 발급하는 주소 예:
 Render 공식 문서 기준 Free Web Service는 15분 동안 요청이 없으면 일시 중지될 수 있으며, 다시 접속하면 약 1분 정도 깨어나는 시간이 생길 수 있습니다.
 
 Free Render Postgres는 현재 30일 후 만료되는 제한이 있으므로, 장기간 운영하려면 DB 플랜 업그레이드가 필요합니다.
+
+
+## 랭킹을 업데이트 후에도 유지하는 방법
+중요: 기존 Render Web Service를 삭제하지 말고 그대로 사용하세요. 같은 PostgreSQL 데이터베이스의 `DATABASE_URL`을 계속 연결해야 합니다.
+
+### 이미 PostgreSQL을 사용 중인 경우
+GitHub에서 파일만 교체하고 Commit하면 됩니다. 데이터베이스는 건드리지 않으므로 기존 랭킹이 유지됩니다.
+
+### 현재 PostgreSQL이 없는 경우
+Render Dashboard에서 PostgreSQL 데이터베이스를 하나 만들고, Web Service의 Environment에 `DATABASE_URL`을 그 데이터베이스의 Internal Database URL로 추가하세요. `REQUIRE_DATABASE=true`도 추가하세요. 이후 한 번 재배포하면 `lucky_scores` 테이블이 자동 생성됩니다.
+
+주의: 과거 기록이 PostgreSQL이 아닌 Render의 임시 `scores.json`에만 있었다면, 이미 재배포로 사라진 기록은 서버에서 자동 복구할 수 없습니다. 현재 DB에 남아 있는 기록은 앞으로 계속 보존됩니다.

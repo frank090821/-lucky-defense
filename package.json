@@ -1,8 +1,8 @@
 {
   "name": "lucky-defense-web",
-  "version": "23.0.0",
+  "version": "24.0.0",
   "private": true,
-  "description": "LUCKY DEFENSE - public web deployment build · ranking fix and boss abilities",
+  "description": "LUCKY DEFENSE - public web deployment build · persistent ranking storage and migration",
   "scripts": {
     "start": "node server.js"
   },

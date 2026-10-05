@@ -13,6 +13,8 @@ services:
         fromDatabase:
           name: lucky-defense-db
           property: connectionString
+      - key: REQUIRE_DATABASE
+        value: 'true'
 
 databases:
   - name: lucky-defense-db
