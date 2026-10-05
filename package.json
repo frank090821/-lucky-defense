@@ -1,6 +1,6 @@
 {
   "name": "lucky-defense-web",
-  "version": "19.0.0",
+  "version": "21.0.0",
   "private": true,
   "description": "LUCKY DEFENSE - public web deployment build",
   "scripts": {

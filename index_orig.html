@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LUCKY DEFENSE 21.0 · STABILITY EDITION</title>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LUCKY DEFENSE</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#060a12;color:#eef2ff;font-family:system-ui,"Malgun Gothic",sans-serif}button,input{font:inherit}button{cursor:pointer;border:1px solid #2b3957;color:#fff;background:#18233a;border-radius:10px;padding:9px 12px;font-weight:800}button:hover{filter:brightness(1.16)}.overlayBox button{position:relative;z-index:7;pointer-events:auto;touch-action:manipulation;}button:disabled{opacity:.45;cursor:not-allowed}.app{max-width:1450px;margin:auto;padding:14px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}.brand{font-size:28px;font-weight:950;letter-spacing:3px}.brand small{display:block;color:#71809d;font-size:10px;letter-spacing:2px;margin-top:2px}.topRight{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.name{width:145px;background:#0d1525;border:1px solid #293752;color:#fff;border-radius:9px;padding:9px}.layout{display:grid;grid-template-columns:minmax(650px,1fr) 360px;gap:12px}.card{background:#0e1626;border:1px solid #202d48;border-radius:15px;box-shadow:0 14px 45px #0008}.gameCard{padding:10px}.gameWrap{position:relative}.game{display:block;width:100%;aspect-ratio:16/10;background:#09101c;border-radius:11px;cursor:crosshair}.toast{position:absolute;top:15px;left:50%;transform:translateX(-50%);background:#111b2fe8;border:1px solid #526684;padding:9px 16px;border-radius:11px;pointer-events:none;font-weight:800}.overlay{position:absolute;inset:0;display:flex;pointer-events:auto;align-items:center;justify-content:center;background:#030712d8;border-radius:11px;z-index:5}.overlayBox{position:relative;z-index:6;pointer-events:auto;background:#101a2d;border:1px solid #3a4c70;border-radius:18px;padding:28px;min-width:330px;text-align:center;box-shadow:0 18px 70px #000b}.overlayBox h1{font-size:38px;margin:0 0 6px}.overlayBox p{color:#9aa9c3;line-height:1.55}.side{padding:13px;overflow:hidden}.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.stat{background:#0a1120;border:1px solid #1e2b45;border-radius:10px;padding:9px}.stat span{color:#71809d;font-size:11px}.stat b{display:block;font-size:20px;margin-top:2px}.section{margin-top:13px}.section h3{margin:0 0 7px;font-size:15px}.summon{width:100%;padding:14px;background:linear-gradient(135deg,#4b1c73,#154f7d);font-size:15px}.summonStatus{margin-top:6px;padding:7px 9px;border:1px solid #2c4160;border-radius:9px;background:#091120;color:#bcd0ec;font-size:10px;line-height:1.35;min-height:0}.summonStatus.good{border-color:#3b7a5c;background:#0d1c16}.summonStatus.legend{border-color:#866a2f;background:#211b0b}.controls{display:grid;grid-template-columns:1fr 1fr;gap:6px}.toggle.on{background:#11643b;border-color:#2caa71}.toggle.off{background:#172238}.cards{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:260px;overflow:auto;padding-right:2px}.towerCard{text-align:left;padding:9px 10px;background:linear-gradient(135deg,#0b1425,#101c31);border-color:#24334f;min-width:0}.towerCard.selected{outline:2px solid #7ab6ff;background:linear-gradient(135deg,#132b4d,#182d4b);box-shadow:0 0 16px #4da3ff33}.towerCard b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rarity{font-size:10px;margin-top:2px}.muted{color:#71809d}.common{color:#cbd5e1}.rare{color:#60a5fa}.epic{color:#c084fc}.legendary{color:#fbbf24}.mythic{color:#fb7185}.divine{color:#fef08a}.celestial{color:#67e8f9}.transcendent{color:#f0abfc}.minirow{display:flex;gap:6px}.minirow button{flex:1}.help{font-size:11px;color:#71809d;line-height:1.55;margin-top:9px}.modal[hidden]{display:none!important}.modal{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;z-index:20;padding:16px}.modalBox{width:min(760px,96vw);max-height:90vh;overflow:auto;background:#0e1728;border:1px solid #3a4d72;border-radius:16px;padding:18px;box-shadow:0 20px 90px #000}.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.modalHead h2{margin:0}.rateTable{width:100%;border-collapse:collapse;font-size:12px}.rateTable th,.rateTable td{border-bottom:1px solid #23314b;padding:7px;text-align:right}.rateTable th:first-child,.rateTable td:first-child{text-align:left}.rankRow{display:grid;grid-template-columns:42px 1fr 90px 70px 60px;gap:5px;padding:8px;border-bottom:1px solid #202d45;align-items:center}.rankRow.top{font-weight:900}.rankBox{max-height:60vh;overflow:auto}.pill{display:inline-block;padding:3px 7px;border-radius:999px;background:#18243a;color:#a9b8d0;font-size:11px}.bar{height:7px;background:#151f32;border-radius:8px;overflow:hidden}.bar>i{display:block;height:100%;background:#54d68b}.kbd{font-family:monospace;background:#151f32;padding:2px 5px;border-radius:5px}.selectedInfo{margin-top:8px;background:#0a1120;border:1px solid #22314c;border-radius:9px;padding:8px;font-size:11px;color:#93a2bc}@media(max-width:1050px){.layout{grid-template-columns:1fr}.side{order:2}}@media(max-width:700px){.app{padding:7px}.top{align-items:flex-start;flex-direction:column}.game{aspect-ratio:1/1}.cards{max-height:220px}}
+*{box-sizing:border-box}body{margin:0;background:#060a12;color:#eef2ff;font-family:system-ui,"Malgun Gothic",sans-serif}button,input{font:inherit}button{cursor:pointer;border:1px solid #2b3957;color:#fff;background:#18233a;border-radius:10px;padding:9px 12px;font-weight:800}button:hover{filter:brightness(1.16)}.overlayBox button{position:relative;z-index:7;pointer-events:auto;touch-action:manipulation;}button:disabled{opacity:.45;cursor:not-allowed}.app{max-width:1450px;margin:auto;padding:14px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}.brand{font-size:28px;font-weight:950;letter-spacing:3px}.brand small{display:block;color:#71809d;font-size:10px;letter-spacing:2px;margin-top:2px}.topRight{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.name{width:145px;background:#0d1525;border:1px solid #293752;color:#fff;border-radius:9px;padding:9px}.layout{display:grid;grid-template-columns:minmax(650px,1fr) 360px;gap:12px}.card{background:#0e1626;border:1px solid #202d48;border-radius:15px;box-shadow:0 14px 45px #0008}.gameCard{padding:10px}.gameWrap{position:relative}.game{display:block;width:100%;aspect-ratio:16/10;background:#09101c;border-radius:11px;cursor:crosshair}.toast{position:absolute;top:15px;left:50%;transform:translateX(-50%);background:#111b2fe8;border:1px solid #526684;padding:9px 16px;border-radius:11px;pointer-events:none;font-weight:800}.overlay{position:absolute;inset:0;display:flex;pointer-events:auto;align-items:center;justify-content:center;background:#030712d8;border-radius:11px;z-index:5}.overlayBox{position:relative;z-index:6;pointer-events:auto;background:#101a2d;border:1px solid #3a4c70;border-radius:18px;padding:28px;min-width:330px;text-align:center;box-shadow:0 18px 70px #000b}.overlayBox h1{font-size:38px;margin:0 0 6px}.overlayBox p{color:#9aa9c3;line-height:1.55}.side{padding:13px;overflow:hidden}.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.stat{background:#0a1120;border:1px solid #1e2b45;border-radius:10px;padding:9px}.stat span{color:#71809d;font-size:11px}.stat b{display:block;font-size:20px;margin-top:2px}.section{margin-top:13px}.section h3{margin:0 0 7px;font-size:15px}.summon{width:100%;padding:14px;background:linear-gradient(135deg,#4b1c73,#154f7d);font-size:15px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:6px}.toggle.on{background:#11643b;border-color:#2caa71}.toggle.off{background:#172238}.cards{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:260px;overflow:auto;padding-right:2px}.towerCard{text-align:left;padding:9px 10px;background:linear-gradient(135deg,#0b1425,#101c31);border-color:#24334f;min-width:0}.towerCard.selected{outline:2px solid #7ab6ff;background:linear-gradient(135deg,#132b4d,#182d4b);box-shadow:0 0 16px #4da3ff33}.towerCard b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rarity{font-size:10px;margin-top:2px}.muted{color:#71809d}.common{color:#cbd5e1}.rare{color:#60a5fa}.epic{color:#c084fc}.legendary{color:#fbbf24}.mythic{color:#fb7185}.divine{color:#fef08a}.celestial{color:#67e8f9}.transcendent{color:#f0abfc}.minirow{display:flex;gap:6px}.minirow button{flex:1}.help{font-size:11px;color:#71809d;line-height:1.55;margin-top:9px}.modal[hidden]{display:none!important}.modal{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;z-index:20;padding:16px}.modalBox{width:min(760px,96vw);max-height:90vh;overflow:auto;background:#0e1728;border:1px solid #3a4d72;border-radius:16px;padding:18px;box-shadow:0 20px 90px #000}.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.modalHead h2{margin:0}.rateTable{width:100%;border-collapse:collapse;font-size:12px}.rateTable th,.rateTable td{border-bottom:1px solid #23314b;padding:7px;text-align:right}.rateTable th:first-child,.rateTable td:first-child{text-align:left}.rankRow{display:grid;grid-template-columns:42px 1fr 90px 70px 60px;gap:5px;padding:8px;border-bottom:1px solid #202d45;align-items:center}.rankRow.top{font-weight:900}.rankBox{max-height:60vh;overflow:auto}.pill{display:inline-block;padding:3px 7px;border-radius:999px;background:#18243a;color:#a9b8d0;font-size:11px}.bar{height:7px;background:#151f32;border-radius:8px;overflow:hidden}.bar>i{display:block;height:100%;background:#54d68b}.kbd{font-family:monospace;background:#151f32;padding:2px 5px;border-radius:5px}.selectedInfo{margin-top:8px;background:#0a1120;border:1px solid #22314c;border-radius:9px;padding:8px;font-size:11px;color:#93a2bc}@media(max-width:1050px){.layout{grid-template-columns:1fr}.side{order:2}}@media(max-width:700px){.app{padding:7px}.top{align-items:flex-start;flex-direction:column}.game{aspect-ratio:1/1}.cards{max-height:220px}}
 
 .enemyGrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:230px;overflow:auto}.enemyCard{border:1px solid #26344a;background:#0d1422;border-radius:10px;padding:7px;text-align:left;cursor:pointer;color:#eef2ff}.enemyCard:hover{border-color:#60a5fa;transform:translateY(-1px)}.enemyDot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;box-shadow:0 0 8px currentColor}.enemyCard small{display:block;color:#8fa0b8;margin-top:3px}.towerCard{border:1px solid #26344a;background:#0d1422;border-radius:10px;padding:5px}.towerPick{width:100%;background:none;border:0;color:#eef2ff;text-align:left;cursor:pointer}
 .stealthInfo{border-color:#3d2f72;background:linear-gradient(135deg,#0d1226,#17112b)}.stealthInfo b{color:#67e8f9}.autoFusionInfo{padding:9px 10px;background:linear-gradient(135deg,#120e22,#0d182a);border:1px solid #39285d;border-radius:11px}.autoFusionInfo h3{margin-bottom:4px}.autoFusionInfo .help{margin-top:0}.mapPanel{padding:10px 11px;background:linear-gradient(135deg,#0c1423,#101c31);border:1px solid #263956;border-radius:11px}.mapLine{display:flex;justify-content:space-between;gap:8px;align-items:center}.mapName{font-weight:900}.mapSub{font-size:10px;color:#71809d;margin-top:4px}.mapTrack{height:6px;background:#162137;border-radius:99px;overflow:hidden;margin-top:7px}.mapTrack i{display:block;height:100%;background:linear-gradient(90deg,#60a5fa,#c084fc,#f472b6);width:0%}.towerSpark{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:1px;box-shadow:0 0 9px currentColor}
@@ -17,7 +17,7 @@
 <div class="top"><div class="brand">LUCKY DEFENSE<small>LUCKY GAME STUDIO · WEB EDITION</small></div><div class="topRight"><input id="name" class="name" maxlength="16" placeholder="닉네임"><button onclick="openRank()">🏆 랭킹</button></div></div>
 <div class="layout"><div class="card gameCard"><div class="gameWrap"><canvas id="game" class="game" width="960" height="600"></canvas><div id="toast" class="toast" hidden></div><div id="overlay" class="overlay"><div class="overlayBox"><h1 id="ovTitle">LUCKY DEFENSE</h1><p id="ovText">운빨로 타워를 뽑고 몰려오는 몬스터를 막아보세요!</p><button id="ovBtn" type="button" onclick="try{window.startGame()}catch(e){var t=document.getElementById('ovText');if(t)t.textContent='게임 시작 오류: '+(e&&e.message?e.message:e)}">🎮 게임 시작</button></div></div></div></div>
 <aside class="card side"><div class="statgrid"><div class="stat"><span>STAGE</span><b id="stage">0</b></div><div class="stat"><span>SCORE</span><b id="score">0</b></div><div class="stat"><span>GOLD</span><b id="gold">550</b></div><div class="stat"><span>BASE HP</span><b id="hp">20</b></div><div class="stat"><span>MONSTERS</span><b id="enemyCount">0</b></div><div class="stat"><span>THREAT</span><b id="threat">1.0×</b></div></div>
-<div class="section"><button class="summon" id="summonBtn" onclick="gacha()">🎰 랜덤 소환 · <span id="cost">100</span>G</button><div id="summonStatus" class="summonStatus" hidden></div></div><div class="section mapPanel"><div class="mapLine"><span class="mapName" id="mapName">🗺️ MAP 1 · 에메랄드 평원</span><span class="pill" id="mapRange">1~10</span></div><div class="mapSub" id="mapSub">100스테이지까지 10개 맵 · 적은 스테이지가 오를수록 강해짐 · 이후 맵 순환</div><div class="mapTrack"><i id="mapProgress"></i></div></div>
+<div class="section"><button class="summon" id="summonBtn" onclick="gacha()">🎰 랜덤 소환 · <span id="cost">100</span>G</button></div><div class="section mapPanel"><div class="mapLine"><span class="mapName" id="mapName">🗺️ MAP 1 · 에메랄드 평원</span><span class="pill" id="mapRange">1~10</span></div><div class="mapSub" id="mapSub">100스테이지까지 10개 맵 · 적은 스테이지가 오를수록 강해짐 · 이후 맵 순환</div><div class="mapTrack"><i id="mapProgress"></i></div></div>
 <div class="section"><div class="controls"><button id="startWave" onclick="manualWave()">▶ 다음 웨이브</button><button id="ratesBtn" onclick="openRates()">🎲 확률표</button><button id="autoWave" class="toggle on" onclick="toggle('autoWave')">🔁 자동 웨이브 ON</button><button id="autoFusion" class="toggle on" onclick="toggle('autoFusion')">🔧 자동 합성 ON</button><button id="sellMode" class="toggle off" onclick="toggle('sellMode')">💰 판매 모드 OFF</button><button id="pause" class="toggle off" onclick="togglePause()">⏸ 일시정지</button></div></div>
 <div class="section"><h3>⚡ 게임 속도</h3><div class="controls"><button onclick="setSpeed(1)">1×</button><button onclick="setSpeed(1.5)">1.5×</button><button onclick="setSpeed(2)">2×</button><button onclick="setSpeed(2.5)">2.5×</button><button onclick="setSpeed(3)">3×</button><button onclick="sellSelected()">선택 타워 판매</button></div></div>
 <div id="selectedInfo" class="selectedInfo" hidden></div>
@@ -49,7 +49,6 @@ let routes=MAPS[0].routes.map(r=>r.map(p=>[...p]));
 let basePos=[...FIXED_BASE];
 let activeMapIndex=-1;
 let running=false,paused=false,autoWave=true,autoFusion=true,sellMode=false,speed=1,stage=0,score=0,gold=5500,hp=20,kills=0,last=0,spawnTimer=0,waveClearedTimer=0,selected=null,selectedTower=null,enemies=[],towers=[],shots=[],particles=[],collection=[],milestones=new Set(),gameOverSent=false,waveTarget=0,spawnedThisWave=0,waveComplete=false,fusionBusy=false,spawnFx=[],fusionFx=[],lastAutoFusion=0,bossBattleElapsed=0,bossStallWarned=false;
-const WAVE_ENEMY_CAP=250; let uiTimer=0; let gameSessionId=0; let runtimeErrorShownAt=0;
 function mapIndexForStage(n=stage){return n<=0?0:((Math.floor((n-1)/10))%MAPS.length)}
 function currentMap(){return MAPS[mapIndexForStage()]}
 function applyMapForStage(){
@@ -76,40 +75,19 @@ function stagePower(){return 1+stage*.12+Math.floor(stage/10)*.18+Math.floor(sta
 function stageSpeedPower(){return 1+stage*.006+Math.floor(stage/25)*.06+Math.floor(stage/100)*.08}
 function threatTitle(){const p=stagePower();return p<3?'안정':p<6?'위험':p<10?'고위험':p<16?'재앙':'지옥'}
 function cost(){return 1000+Math.min(16,Math.floor(stage/10))*250}
-function notify(s){const x=document.getElementById('toast');if(!x)return;x.textContent=s;x.hidden=false;clearTimeout(notify.t);notify.t=setTimeout(()=>x.hidden=true,1800)}
-function showSummonStatus(name){const el=document.getElementById('summonStatus');if(!el)return;const d=T[name];const strong=['DIVINE','CELESTIAL','TRANSCENDENT'].includes(d?.rarity);el.className='summonStatus '+(strong?'legend':'good');el.hidden=false;el.innerHTML='<b>🎉 '+(TKR[name]||name)+'</b> · '+(rarityKR[d.rarity]||d.rarity)+' · '+(d.desc||'획득');clearTimeout(showSummonStatus.t);showSummonStatus.t=setTimeout(()=>el.hidden=true,3200)}
+function notify(s){const x=document.getElementById('toast');x.textContent=s;x.hidden=false;clearTimeout(notify.t);notify.t=setTimeout(()=>x.hidden=true,2300)}
 function weighted(obj){let total=Object.values(obj).reduce((a,b)=>a+b,0),r=Math.random()*total;for(const [k,v] of Object.entries(obj)){r-=v;if(r<=0)return k}return Object.keys(obj)[0]}
 function currentRates(){return RATES[Math.min(Math.floor(stage/20),RATES.length-1)]}
 const GACHA_STRONG_CANNON_PENALTY={VoidCannon:.30,DivineCannon:.14,CelestialCannon:.08,EternalCannon:.05,HeavyCannon:.35,ShockCannon:.25,GravityCannon:.18,HellfireCannon:.12,OmegaCannon:.08,ApocalypseCannon:.05,WorldEndCannon:.03};
-function gacha(){
- if(!running||paused)return;
- const co=cost();
- if(gold<co){notify('💰 골드가 부족합니다!');return}
- const unlocked=Object.keys(T).filter(n=>stage>=(T[n].unlock||1));
- if(!unlocked.length){notify('🎰 현재 뽑을 수 있는 타워가 없습니다.');return}
- gold-=co;
- const rates=currentRates();
- const eligibleRarities=Object.keys(rates).filter(r=>rates[r]>0&&unlocked.some(n=>T[n].rarity===r));
- const rarity=weighted(Object.fromEntries(eligibleRarities.map(r=>[r,rates[r]])));
- const names=unlocked.filter(n=>T[n].rarity===rarity);
- const weights=names.map(n=>Math.max(0.0001,(T[n].chance||1)*(GACHA_STRONG_CANNON_PENALTY[n]||1)));
- const total=weights.reduce((a,b)=>a+b,0);
- let r=Math.random()*total;
- let n=names[names.length-1];
- for(let i=0;i<names.length;i++){r-=weights[i];if(r<=0){n=names[i];break}}
- collection.push({name:n,level:1});
- showSummonStatus(n);
- notify('🎉 '+(TKR[n]||n)+' 획득!');
- renderInventory();updateUI();
-}
+function gacha(){if(!running||paused)return;const co=cost();if(gold<co){notify('💰 골드가 부족합니다!');return}gold-=co;const rarity=weighted(currentRates());let names=Object.keys(T).filter(n=>T[n].rarity===rarity && stage>=(T[n].unlock||1));if(!names.length)names=Object.keys(T).filter(n=>T[n].rarity===rarity);const weights=names.map(n=>(T[n].chance||1)*(GACHA_STRONG_CANNON_PENALTY[n]||1));const total=weights.reduce((a,b)=>a+b,0);let r=Math.random()*total;let n=names[names.length-1];for(let i=0;i<names.length;i++){r-=weights[i];if(r<=0){n=names[i];break}}collection.push({name:n,level:1});notify('🎉 '+(TKR[n]||n)+' 획득!');renderInventory();updateUI()}
 function toggle(k){if(k==='autoWave')autoWave=!autoWave;if(k==='autoFusion')autoFusion=!autoFusion;if(k==='sellMode')sellMode=!sellMode;updateButtons()}
 function togglePause(){if(!running)return;paused=!paused;updateButtons()}
 function updateButtons(){for(const [id,v,label] of [['autoWave',autoWave,'🔁 자동 웨이브'],['autoFusion',autoFusion,'🔧 자동 합성'],['sellMode',sellMode,'💰 판매 모드']]){const b=document.getElementById(id);b.className='toggle '+(v?'on':'off');b.textContent=label+' '+(v?'ON':'OFF')}const p=document.getElementById('pause');p.className='toggle '+(paused?'on':'off');p.textContent=paused?'▶ 재개':'⏸ 일시정지';document.getElementById('startWave').disabled=!running||paused||stage>0&&!waveComplete;}
 function setSpeed(v){speed=v;notify('⚡ 게임 속도 '+v+'×')}
-function startGame(){gameSessionId++;running=true;paused=false;gameOverSent=false;stage=0;score=0;gold=5500;hp=20;kills=0;enemies=[];towers=[];shots=[];particles=[];collection=[];milestones=new Set();selected=null;selectedTower=null;speed=1;waveTarget=0;spawnedThisWave=0;waveComplete=false;fusionBusy=false;spawnFx=[];fusionFx=[];bossBattleElapsed=0;bossStallWarned=false;uiTimer=0;document.getElementById('overlay').style.display='none';nextWave();renderInventory();updateButtons();updateUI()}
+function startGame(){running=true;paused=false;gameOverSent=false;stage=0;score=0;gold=5500;hp=20;kills=0;enemies=[];towers=[];shots=[];particles=[];collection=[];milestones=new Set();selected=null;selectedTower=null;speed=1;waveTarget=0;spawnedThisWave=0;waveComplete=false;fusionBusy=false;spawnFx=[];fusionFx=[];bossBattleElapsed=0;bossStallWarned=false;document.getElementById('overlay').style.display='none';nextWave();renderInventory();updateButtons();updateUI()}
 window.startGame=startGame;
 function manualWave(){if(!running||paused)return;if(stage>0&&!waveComplete){notify('⚠️ 현재 웨이브가 아직 진행 중입니다.');return}nextWave()}
-function nextWave(){if(!running||paused)return;if(stage>0&&!waveComplete)return;if(enemies.length)return;const prevMap=mapIndexForStage(stage);stage++;applyMapForStage();const newMap=mapIndexForStage(stage);spawnTimer=0;waveClearedTimer=0;spawnedThisWave=0;waveTarget=Math.min(WAVE_ENEMY_CAP,7+stage*2);waveComplete=false;spawnFx=[];bossBattleElapsed=0;bossStallWarned=false;if(newMap!==prevMap){notify('🗺️ MAP '+(newMap+1)+' · '+currentMap().name+' 진입!')}if(stage===101){notify('♻️ 100스테이지 완료! 첫 번째 맵부터 다시 순환합니다.')}notify(stage%10===0?'👑 '+stage+' 스테이지 보스 등장!':'🌊 '+stage+' 스테이지 시작!');if([25,50,75,100].includes(stage)&&!milestones.has(stage)){const bonus={25:500,50:900,75:1400,100:2500}[stage];gold+=bonus;milestones.add(stage);notify('🏆 '+stage+' 스테이지 달성! +'+bonus+'G')}updateUI()}
+function nextWave(){if(!running||paused)return;if(stage>0&&!waveComplete)return;if(enemies.length)return;const prevMap=mapIndexForStage(stage);stage++;applyMapForStage();const newMap=mapIndexForStage(stage);spawnTimer=0;waveClearedTimer=0;spawnedThisWave=0;waveTarget=7+stage*2;waveComplete=false;spawnFx=[];bossBattleElapsed=0;bossStallWarned=false;if(newMap!==prevMap){notify('🗺️ MAP '+(newMap+1)+' · '+currentMap().name+' 진입!')}if(stage===101){notify('♻️ 100스테이지 완료! 첫 번째 맵부터 다시 순환합니다.')}notify(stage%10===0?'👑 '+stage+' 스테이지 보스 등장!':'🌊 '+stage+' 스테이지 시작!');if([25,50,75,100].includes(stage)&&!milestones.has(stage)){const bonus={25:500,50:900,75:1400,100:2500}[stage];gold+=bonus;milestones.add(stage);notify('🏆 '+stage+' 스테이지 달성! +'+bonus+'G')}updateUI()}
 function chooseBoss(){
  const w={demon:26,golem:20,beast:16,titan:11,lich:10,dragonboss:9};
  if(stage>=30){w.overlord=5}
@@ -150,23 +128,11 @@ function makeEnemy(){
  enemies.push(e);spawnedThisWave++;spawnFx.push({x:e.x,y:e.y,t:e.spawnT,max:e.spawnT,color:enemyColors[kind]||'#60a5fa',elite,boss});
 }
 function registerKill(e){gold+=e.reward;score+=e.reward*(e.boss?2:1);kills++;if(e.boss)notify('👑 보스 처치! +'+e.reward+'G');if(Math.random()<.035){const names=Object.keys(T);const n=names[Math.floor(Math.random()*names.length)];collection.push({name:n,level:1});notify('🎁 몬스터가 '+TKR[n]+'을(를) 떨어뜨렸습니다!');}}
-function damageEnemy(e,dmg,t){
- if(!e||!t||!Number.isFinite(dmg)||dmg<=0||!Number.isFinite(e.hp))return;
- let amount=dmg;
- if(e.shield>0&&!t.ignoreShield)amount*=e.shield<1?e.shield:1;
- if(e.boss){const limit=Math.min(70,40+stage*.3);if(bossBattleElapsed>limit)amount*=Math.min(5,1+(bossBattleElapsed-limit)*.075)}
- e.hp-=amount;
- if(Number.isFinite(e.x)&&Number.isFinite(e.y))particles.push({x:e.x,y:e.y,t:.22,max:.22,type:'hit',r:2+Math.random()*2});
- if(t.slow)e.slow=Math.max(e.slow,t.slow);
- if(t.burn)e.burn=Math.max(e.burn||0,t.burn);
-}
+function damageEnemy(e,dmg,t){if(e.shield>0&&!t.ignoreShield)dmg*=e.shield<1?e.shield:1;if(e.boss){const limit=Math.min(70,40+stage*.3);if(bossBattleElapsed>limit){dmg*=Math.min(5,1+(bossBattleElapsed-limit)*.075)}}e.hp-=dmg;particles.push({x:e.x,y:e.y,t:.25,type:'hit'});if(t.slow)e.slow=Math.max(e.slow,t.slow);if(t.burn)e.burn=Math.max(e.burn||0,t.burn)}
 function towerAttack(t){
- if(!t||!T[t.name]||!Number.isFinite(t.x)||!Number.isFinite(t.y))return;
- const d=T[t.name];
- const candidates=enemies.filter(e=>e&&Number.isFinite(e.x)&&Number.isFinite(e.y)&&Number.isFinite(e.hp)&&e.hp>0&&(e.stealth<=0||e.detected>0)&&Math.hypot(e.x-t.x,e.y-t.y)<=d.range);
+ const d=T[t.name], candidates=enemies.filter(e=>(e.stealth<=0||e.detected>0) && Math.hypot(e.x-t.x,e.y-t.y)<=d.range);
  if(!candidates.length)return;
- const target=candidates.find(e=>e.boss)||candidates.slice().sort((a,b)=>((b.idx??0)-(a.idx??0))||((b.boss?1:0)-(a.boss?1:0)))[0];
- if(!target)return;
+ const target=candidates.find(e=>e.boss) || candidates.sort((a,b)=>b.idx-a.idx)[0];
  t.angle=Math.atan2(target.y-t.y,target.x-t.x)+Math.PI/2;
  const dmg=d.damage*(1+(t.level-1)*.28);
  const n=t.name;
@@ -241,8 +207,6 @@ function performAutoFusion(pair){
  const result=fusionResultLevel(level);
  const name=pair.name;
  const label=TKR[name]||name;
- const td=T[name];
- if(!td)return false;
 
  if(pair.mode==='mixed'){
    const idx=collection.indexOf(pair.item);
@@ -252,7 +216,7 @@ function performAutoFusion(pair){
    pair.tower.level=result.outLevel;
    pair.tower.cd=0;
    if(selectedTower===pair.tower)selectedTower=pair.tower;
-   fusionFx.push({x:pair.tower.x,y:pair.tower.y,t:.65,max:.65,color:rgb(td.color)});
+   fusionFx.push({x:pair.tower.x,y:pair.tower.y,t:.65,max:.65,color:rgb(T[name].color)});
    notify(result.success
      ? '🔧 자동 합성 · '+label+' Lv.'+level+'(설치) + Lv.'+level+'(보유) → Lv.'+result.outLevel
      : '🔧 자동 합성 실패 · '+label+' Lv.'+level+' → Lv.'+result.outLevel);
@@ -278,7 +242,7 @@ function performAutoFusion(pair){
    pair.towerA.level=result.outLevel;
    pair.towerA.cd=0;
    if(selectedTower===pair.towerB)selectedTower=pair.towerA;
-   fusionFx.push({x:pair.towerA.x,y:pair.towerA.y,t:.65,max:.65,color:rgb(td.color)});
+   fusionFx.push({x:pair.towerA.x,y:pair.towerA.y,t:.65,max:.65,color:rgb(T[name].color)});
    notify(result.success
      ? '🔧 자동 합성 · 설치된 '+label+' Lv.'+level+' ×2 → Lv.'+result.outLevel
      : '🔧 자동 합성 실패 · 설치된 '+label+' Lv.'+level+' ×2 → Lv.'+result.outLevel);
@@ -305,26 +269,8 @@ function fuseAll(){
 function canPlace(x,y){if(x<15||x>915||y<15||y>585)return false;for(const r of routes){for(let i=0;i<r.length-1;i++){const a=r[i],b=r[i+1],dx=b[0]-a[0],dy=b[1]-a[1],t=Math.max(0,Math.min(1,((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy))),px=a[0]+dx*t,py=a[1]+dy*t;if(Math.hypot(x-px,y-py)<30)return false}}return !towers.some(t=>Math.hypot(t.x-x,t.y-y)<34)}
 function placeTower(name,x,y,level=null){if(sellMode){const i=towers.findIndex(t=>Math.hypot(t.x-x,t.y-y)<28);if(i>=0){const t=towers[i],refund=Math.floor((T[t.name].cost||0)*.5);gold+=refund;towers.splice(i,1);notify('💰 '+TKR[t.name]+' 판매 +'+refund+'G');renderInventory();updateUI()}return}if(!canPlace(x,y)){notify('🚫 길 위나 다른 타워에는 설치할 수 없습니다.');return}const i=collection.findIndex(a=>a.name===name&&(level==null||a.level===level));if(i<0){selected=null;renderInventory();return}const item=collection.splice(i,1)[0];towers.push({name,level:item.level,x,y,cd:0});selected=null;notify('🏗️ '+TKR[name]+' 설치');renderInventory();updateUI()}
 function sellSelected(){if(!selectedTower)return notify('판매할 타워를 맵에서 선택하세요.');const i=towers.indexOf(selectedTower);if(i<0){selectedTower=null;updateUI();return}const t=towers[i];const refund=Math.floor((T[t.name].cost||0)*.5);gold+=refund;towers.splice(i,1);selectedTower=null;notify('💰 '+TKR[t.name]+' Lv.'+t.level+' 판매 +'+refund+'G');updateUI()}
-function stabilityError(err,context=''){
- const now=performance.now();
- console.error('LUCKY DEFENSE recovered error'+(context?' · '+context:''),err);
- if(now-runtimeErrorShownAt>1800){runtimeErrorShownAt=now;try{notify('⚠️ 일시적인 오류를 자동 복구했습니다.')}catch{}}
-}
-function sanitizeState(){
- if(!Array.isArray(enemies))enemies=[];
- if(!Array.isArray(towers))towers=[];
- if(!Array.isArray(shots))shots=[];
- if(!Array.isArray(particles))particles=[];
- if(!Array.isArray(collection))collection=[];
- enemies=enemies.filter(e=>e&&Number.isFinite(e.x)&&Number.isFinite(e.y)&&Number.isFinite(e.hp)&&Number.isFinite(e.max)&&Array.isArray(e.route)&&e.route.length>=2&&Number.isInteger(e.idx)&&e.idx>=0&&e.idx<e.route.length);
- towers=towers.filter(t=>t&&T[t.name]&&Number.isFinite(t.x)&&Number.isFinite(t.y)&&Number.isFinite(t.level));
- shots=shots.filter(s=>s&&Number.isFinite(s.x)&&Number.isFinite(s.y)&&Number.isFinite(s.tx)&&Number.isFinite(s.ty)&&Number.isFinite(s.t)&&Number.isFinite(s.max)&&s.max>0);
- particles=particles.filter(p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.y)&&Number.isFinite(p.t)&&p.t>0);
-}
 function update(dt){
- if(!running||paused)return;
- sanitizeState();
- dt=Math.min(.05,Math.max(0,Number(dt)||0))*speed;
+ if(!running||paused)return;dt*=speed;
  const liveBoss=enemies.find(e=>e.boss&&e.hp>0);
  if(liveBoss){bossBattleElapsed+=dt;liveBoss.bossTime=bossBattleElapsed;}else{bossBattleElapsed=0;bossStallWarned=false;}
  if(liveBoss && bossBattleElapsed>Math.min(70,40+stage*.3) && !bossStallWarned){bossStallWarned=true;notify('⚠️ 보스가 광폭화했습니다! 보스에게 추가 피해가 적용됩니다.');}
@@ -332,11 +278,7 @@ function update(dt){
  spawnTimer-=dt;
  if(spawnedThisWave<waveTarget&&spawnTimer<=0){makeEnemy();spawnTimer=.42}
  for(const fx of spawnFx)fx.t-=dt;spawnFx=spawnFx.filter(f=>f.t>0);for(const fx of fusionFx)fx.t-=dt;fusionFx=fusionFx.filter(f=>f.t>0);
- for(const p of particles){p.t-=dt;p.y-=18*dt;p.r=Math.min(7,(p.r||2)+24*dt)}
- particles=particles.filter(p=>p.t>0);
- if(particles.length>1200)particles.splice(0,particles.length-1200);
- for(let ei=enemies.length-1;ei>=0;ei--){const e=enemies[ei];try{
-
+ for(const e of enemies){
   if(e.hp<=0)continue;
   if(e.spawnT>0){e.spawnT-=dt;continue;}
   if(e.burn){e.burn-=dt;e.hp-=18*dt;}
@@ -361,8 +303,8 @@ function update(dt){
   const dx=p[0]-e.x,dy=p[1]-e.y,d=Math.hypot(dx,dy);
   if(d<3){e.idx++;if(e.idx>=e.route.length-1){hp-=e.leakDamage;e.hp=0;continue}}
   else{let sp=e.speed*(e.slow>0?.55:1);if(e.kind==='berserker'&&e.hp<e.max*.45)sp*=1.35;if(e.kind==='reaper')sp*=1.25;if(e.kind==='executionerBoss')sp*=1.35;if(e.kind==='worldbreaker'&&e.hp<e.max*.5)sp*=1.22;e.angle=Math.atan2(dy,dx);e.x+=dx/d*sp*60*dt;e.y+=dy/d*sp*60*dt}
- }catch(err){stabilityError(err,'enemy update');enemies.splice(ei,1)}}
- for(let ti=towers.length-1;ti>=0;ti--){const t=towers[ti];try{t.cd-=dt;if(t.cd<=0){towerAttack(t);t.cd=T[t.name].cool}}catch(err){stabilityError(err,'tower update');if(selectedTower===t)selectedTower=null;towers.splice(ti,1)}}
+ }
+ for(const t of towers){t.cd-=dt;if(t.cd<=0){towerAttack(t);t.cd=T[t.name].cool}}
  for(const s of shots)s.t-=dt;shots=shots.filter(s=>s.t>0);
  for(let i=enemies.length-1;i>=0;i--){const e=enemies[i];if(e.hp<=0){
    if(e.idx>=e.route.length-1){enemies.splice(i,1);continue}
@@ -372,10 +314,9 @@ function update(dt){
  if(autoFusion && performance.now()-lastAutoFusion>300){lastAutoFusion=performance.now();fuseAll();}
  if(hp<=0){hp=0;gameOver();return}
  // wave clears only after all planned enemies have spawned and all are gone
- if(spawnedThisWave>=waveTarget&&enemies.length===0&&!waveComplete){waveClearedTimer+=dt;if(waveClearedTimer>0.8){waveComplete=true;notify('✅ '+stage+' 스테이지 클리어!');updateButtons();if(autoWave){const session=gameSessionId;setTimeout(()=>{if(session===gameSessionId&&running&&!paused&&waveComplete)nextWave()},350)}}}
+ if(spawnedThisWave>=waveTarget&&enemies.length===0&&!waveComplete){waveClearedTimer+=dt;if(waveClearedTimer>0.8){waveComplete=true;notify('✅ '+stage+' 스테이지 클리어!');updateButtons();if(autoWave){setTimeout(()=>{if(running&&!paused&&waveComplete)nextWave()},350)}}}
  renderEnemyBook();
- uiTimer-=dt;
- if(uiTimer<=0){uiTimer=.06;updateUI();}
+ updateUI();
 }
 function rgb(a){return `rgb(${a[0]},${a[1]},${a[2]})`}
 function theme(){return currentMap()}
@@ -416,15 +357,9 @@ function draw(){
  ctx.fillStyle='#35d07f';ctx.beginPath();ctx.moveTo(-20,22);ctx.lineTo(-15,-12);ctx.lineTo(0,-24);ctx.lineTo(15,-12);ctx.lineTo(20,22);ctx.closePath();ctx.fill();
  ctx.fillStyle='#0b281b';ctx.fillRect(-6,5,12,17);ctx.fillStyle='#d8ffe8';ctx.font='bold 9px system-ui';ctx.textAlign='center';ctx.fillText('BASE',0,-34);ctx.restore();
  // towers
- for(const t of towers){try{drawTower(t)}catch(err){stabilityError(err,'tower render')}}
+ for(const t of towers)drawTower(t);
  // fusion FX
  for(const f of fusionFx){const p=1-f.t/f.max;ctx.save();ctx.globalAlpha=1-p;ctx.strokeStyle=f.color;ctx.lineWidth=3;ctx.shadowColor=f.color;ctx.shadowBlur=18;ctx.beginPath();ctx.arc(f.x,f.y,14+p*26,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=(1-p)*.75;ctx.beginPath();ctx.arc(f.x,f.y,6+p*18,0,Math.PI*2);ctx.stroke();ctx.restore();}
- // hit particles — capped so long games cannot leak memory
- for(const p of particles){
-   const a=Math.max(0,Math.min(1,p.t/(p.max||.22)));
-   ctx.save();ctx.globalAlpha=a;ctx.fillStyle='#fff';ctx.shadowColor='#fff';ctx.shadowBlur=8;
-   ctx.beginPath();ctx.arc(p.x,p.y,p.r||2,0,Math.PI*2);ctx.fill();ctx.restore();
- }
  // projectiles — tower별 전용 공격 모션
  for(const s of shots){
    const p=1-Math.max(0,s.t)/s.max, x=s.x+(s.tx-s.x)*p, y=s.y+(s.ty-s.y)*p;
@@ -474,99 +409,67 @@ function draw(){
  // spawn portals / summon effects
  for(const fx of spawnFx){const p=1-fx.t/fx.max;ctx.save();ctx.translate(fx.x,fx.y);ctx.globalAlpha=Math.max(0,1-p);ctx.strokeStyle=fx.color;ctx.shadowColor=fx.color;ctx.shadowBlur=20;ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,10+28*p,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(0,0,4+12*p,0,Math.PI*2);ctx.stroke();ctx.fillStyle=fx.color+'55';ctx.fill();ctx.restore()}
  // enemies
- for(const e of enemies){try{drawEnemy(e)}catch(err){stabilityError(err,'enemy render')}}
+ for(const e of enemies)drawEnemy(e);
  // HUD
  ctx.textAlign='left';ctx.fillStyle='#fff';ctx.font='900 18px system-ui';ctx.fillText('STAGE '+stage+'  ·  '+currentMap().name+'  ·  '+score.toLocaleString()+' SCORE',18,25);
  ctx.font='12px system-ui';ctx.fillStyle='#aebbd0';ctx.fillText((paused?'⏸ 일시정지 · ':'')+'MAP '+(mapIndexForStage()+1)+'/10 · 몬스터 '+enemies.length+' · 위협도 '+stagePower().toFixed(1)+'×',18,44);ctx.textAlign='right';ctx.fillStyle=th.accent;ctx.font='900 12px system-ui';ctx.fillText('MAP '+(mapIndexForStage()+1)+' · '+currentMap().name,940,44);ctx.fillStyle='#aebbd0';ctx.fillText('속도 '+speed+'×',940,25);
 }
 function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
 function drawTower(t){
- const d=T[t.name];
- if(!d)return;
- const col=rgb(d.color),towerSelected=selectedTower===t,now=performance.now()/1000;
- const rarityIndex={COMMON:0,RARE:1,EPIC:2,LEGENDARY:3,MYTHIC:4,DIVINE:5,CELESTIAL:6,TRANSCENDENT:7}[d.rarity]||0;
- const n=t.name;
+ const d=T[t.name], col=rgb(d.color), towerSelected=selectedTower===t;
  ctx.save();ctx.translate(t.x,t.y);
- // selection / range
+ // range
  if(towerSelected){ctx.fillStyle=col+'10';ctx.strokeStyle=col+'66';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,d.range,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.strokeStyle='#fff8';ctx.setLineDash([6,6]);ctx.beginPath();ctx.arc(0,0,d.range+4,0,Math.PI*2);ctx.stroke();ctx.setLineDash([])}
- // premium pedestal
+ // premium pedestal + glow
+ const now=performance.now()/1000;
  const wobble=Math.sin(now*2.2+t.x*.03)*.8;
- ctx.fillStyle='#0009';ctx.beginPath();ctx.ellipse(0,19,26,8,0,0,Math.PI*2);ctx.fill();
- ctx.fillStyle='#0a1220';ctx.strokeStyle=col+'aa';ctx.lineWidth=2;roundRect(-23,7,46,17,7);ctx.fill();ctx.stroke();
- ctx.strokeStyle=col+'55';ctx.beginPath();ctx.arc(0,8,22+wobble,0,Math.PI*2);ctx.stroke();
- if(rarityIndex>=2){ctx.save();ctx.globalAlpha=.32+.12*Math.sin(now*3+t.y*.04);ctx.strokeStyle=col;ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.beginPath();ctx.arc(0,0,18+rarityIndex*.45,now*.55,now*.55+Math.PI*1.35);ctx.stroke();ctx.restore()}
- // DRAGON: keep an actual dragon silhouette, not a generic cannon
- if(n==='Dragon'){
-   ctx.save();
-   const flap=Math.sin(now*4.2)*0.12;
-   ctx.shadowColor=col;ctx.shadowBlur=18;
-   // tail
-   ctx.strokeStyle=col;ctx.lineWidth=6;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(3,12);ctx.quadraticCurveTo(20,19,27,7);ctx.quadraticCurveTo(33,-2,27,-10);ctx.stroke();
-   // body
-   ctx.fillStyle=col;ctx.strokeStyle='#fff6';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(0,5,13,17,0,0,Math.PI*2);ctx.fill();ctx.stroke();
-   // wings
-   ctx.beginPath();ctx.moveTo(-7,0);ctx.quadraticCurveTo(-25,-16,-27,1);ctx.quadraticCurveTo(-22,12,-9,12);ctx.closePath();ctx.fill();ctx.stroke();
-   ctx.beginPath();ctx.moveTo(7,0);ctx.quadraticCurveTo(25,-16,27,1);ctx.quadraticCurveTo(22,12,9,12);ctx.closePath();ctx.fill();ctx.stroke();
-   // neck + head
-   ctx.strokeStyle=col;ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(1,-13);ctx.stroke();
-   ctx.fillStyle=col;ctx.beginPath();ctx.ellipse(2,-17,10,7,0,0,Math.PI*2);ctx.fill();ctx.stroke();
-   // horns / eyes / nostril
-   ctx.strokeStyle=col;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-3,-22);ctx.lineTo(-7,-28);ctx.moveTo(5,-22);ctx.lineTo(9,-28);ctx.stroke();
-   ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-1,-18,1.7,0,Math.PI*2);ctx.arc(5,-18,1.7,0,Math.PI*2);ctx.fill();ctx.fillStyle='#111';ctx.beginPath();ctx.arc(-1,-18,0.7,0,Math.PI*2);ctx.arc(5,-18,0.7,0,Math.PI*2);ctx.fill();
-   // flame breath
-   const flame=7+Math.sin(now*8)*2;ctx.fillStyle='#ffd166';ctx.shadowColor='#ff4b2b';ctx.shadowBlur=16;ctx.beginPath();ctx.moveTo(11,-17);ctx.quadraticCurveTo(20,-17,25+flame*.35,-12);ctx.quadraticCurveTo(17,-8,11,-12);ctx.closePath();ctx.fill();
-   // orbit embers
-   ctx.fillStyle=col;for(let i=0;i<4;i++){const a=now*1.8+i*Math.PI/2;ctx.beginPath();ctx.arc(Math.cos(a)*27,Math.sin(a)*24,2.2,0,Math.PI*2);ctx.fill()}
-   ctx.restore();
- } else if(['Cannon','Mortar','Bombard','RailCannon','InfernoCannon','VoidCannon','DivineCannon','CelestialCannon','LightCannon','MiniCannon','OldCannon','PocketCannon','StoneCannon','BurstCannon','SiegeCannon','TripleCannon','EternalCannon','HeavyCannon','FortressCannon','BarrageCannon','ArcCannon','TitanCannon','QuantumCannon','NovaCannon','SingularityCannon','ShockCannon','GravityCannon','HellfireCannon','OmegaCannon','ApocalypseCannon','WorldEndCannon'].includes(n)){
-   const heavy=['FortressCannon','TitanCannon','QuantumCannon','NovaCannon','SingularityCannon','WorldEndCannon','ApocalypseCannon','OmegaCannon','EternalCannon'].includes(n);
-   const triple=['BarrageCannon','TripleCannon'].includes(n);
-   const mortar=['Mortar','Bombard'].includes(n);
-   const rail=n==='RailCannon';
-   const voidCore=['VoidCannon','GravityCannon','SingularityCannon'].includes(n);
-   const fire=['InfernoCannon','HellfireCannon'].includes(n);
-   const divine=['DivineCannon','CelestialCannon','EternalCannon','OmegaCannon','ApocalypseCannon','WorldEndCannon','NovaCannon'].includes(n);
-   // armored hull
-   ctx.fillStyle=heavy?'#1b2537':'#202b3a';ctx.strokeStyle=col;ctx.lineWidth=2;roundRect(-15,0,30,17,6);ctx.fill();ctx.stroke();
-   ctx.fillStyle='#0a1220';ctx.beginPath();ctx.arc(0,4,9,0,Math.PI*2);ctx.fill();ctx.strokeStyle=col+'88';ctx.stroke();
-   // side plates + bolts
-   ctx.fillStyle=col+'88';ctx.fillRect(-18,2,4,12);ctx.fillRect(14,2,4,12);ctx.fillStyle='#fff8';for(const bx of [-12,12]){for(const by of [4,11]){ctx.beginPath();ctx.arc(bx,by,1.3,0,Math.PI*2);ctx.fill()}}
-   const barrel=mortar?25:(rail?30:(heavy?34:28));
-   ctx.save();ctx.rotate(t.angle||0);
-   if(triple){for(const off of [-7,0,7]){ctx.fillStyle='#162235';ctx.strokeStyle=col;ctx.lineWidth=2;roundRect(-4+off,-barrel,8,barrel+9,3);ctx.fill();ctx.stroke();ctx.fillStyle=col;ctx.fillRect(-5+off,-barrel,10,5)}}
-   else if(mortar){ctx.fillStyle='#151f2f';ctx.strokeStyle=col;ctx.lineWidth=2;roundRect(-6,-barrel,12,barrel+10,5);ctx.fill();ctx.stroke();ctx.fillStyle=col;ctx.fillRect(-7,-barrel,14,6)}
-   else if(rail){ctx.fillStyle='#1a2434';ctx.strokeStyle=col;ctx.lineWidth=2;ctx.fillRect(-8,-barrel,5,barrel+10);ctx.fillRect(3,-barrel,5,barrel+10);ctx.strokeRect(-8,-barrel,5,barrel+10);ctx.strokeRect(3,-barrel,5,barrel+10);ctx.fillStyle='#fff8';ctx.fillRect(-3,-barrel+2,6,5)}
-   else {ctx.fillStyle='#162235';ctx.strokeStyle=col;ctx.lineWidth=2;roundRect(-6,-barrel,12,barrel+10,4);ctx.fill();ctx.stroke();ctx.fillStyle=col;ctx.fillRect(-7,-barrel,14,5);ctx.fillStyle='#fff9';ctx.fillRect(-3,-barrel+1,6,2)}
-   ctx.restore();
-   // signature cores / mechanisms
-   if(voidCore){ctx.fillStyle='#05020d';ctx.shadowColor=col;ctx.shadowBlur=18;ctx.beginPath();ctx.arc(0,4,6,0,Math.PI*2);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,4,10+Math.sin(now*4)*2,0,Math.PI*2);ctx.stroke()}
-   else if(fire){ctx.fillStyle='#ff5b2f';ctx.shadowColor='#ff3b18';ctx.shadowBlur=20;ctx.beginPath();ctx.arc(0,4,6,0,Math.PI*2);ctx.fill();ctx.fillStyle='#ffd166';ctx.beginPath();ctx.arc(0,4,2.5+Math.sin(now*8),0,Math.PI*2);ctx.fill()}
-   else {ctx.fillStyle=col;ctx.shadowColor=col;ctx.shadowBlur=12;ctx.beginPath();ctx.arc(0,4,4+1.2*Math.sin(now*5),0,Math.PI*2);ctx.fill()}
-   // heavy/divine orbit system
-   if(heavy||divine){ctx.save();ctx.strokeStyle=col;ctx.globalAlpha=.75;ctx.lineWidth=2;for(let i=0;i<(divine?3:2);i++){const rr=25+i*6;ctx.beginPath();ctx.arc(0,3,rr,now*(.45+i*.08),now*(.45+i*.08)+Math.PI*(.72+.1*i));ctx.stroke()}ctx.restore();}
-   if(divine){for(let i=0;i<6;i++){const a=now*(.7+i*.06)+i*Math.PI/3;ctx.fillStyle=i%2?col:'#fff';ctx.beginPath();ctx.arc(Math.cos(a)*22,Math.sin(a)*20,2.1,0,Math.PI*2);ctx.fill()}}
-   if(n==='BarrageCannon'){ctx.strokeStyle=col;ctx.globalAlpha=.5;ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,4,27+Math.sin(now*5)*2,0,Math.PI*2);ctx.stroke();}
-   if(n==='ArcCannon'){ctx.strokeStyle='#67e8f9';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-13,-6);ctx.lineTo(-6,0);ctx.lineTo(-13,6);ctx.moveTo(13,-6);ctx.lineTo(6,0);ctx.lineTo(13,6);ctx.stroke();}
-   if(n==='TitanCannon'){ctx.fillStyle='#fde68a';ctx.fillRect(-9,9,18,3)}
-   if(n==='QuantumCannon'){ctx.strokeStyle='#a5f3fc';ctx.beginPath();ctx.moveTo(-12,-7);ctx.lineTo(0,-13);ctx.lineTo(12,-7);ctx.lineTo(0,0);ctx.closePath();ctx.stroke()}
-   if(n==='NovaCannon'){ctx.fillStyle='#f9a8d4';ctx.globalAlpha=.22;ctx.beginPath();ctx.arc(0,3,28+Math.sin(now*6)*3,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}
-   if(n==='SingularityCannon'){ctx.fillStyle='#010006';ctx.beginPath();ctx.arc(0,4,8,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#fff';ctx.globalAlpha=.7;ctx.beginPath();ctx.arc(0,4,13+4*Math.sin(now*5),0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1}
- } else {
-   // non-cannon towers: refined core-based silhouettes
-   ctx.fillStyle=col;ctx.strokeStyle=towerSelected?'#fff':col;ctx.lineWidth=2;
+ ctx.fillStyle='#0009';ctx.beginPath();ctx.ellipse(0,18,25,8,0,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#0a1220';ctx.strokeStyle=col+'aa';ctx.lineWidth=2;roundRect(-22,7,44,16,7);ctx.fill();ctx.stroke();
+ ctx.strokeStyle=col+'55';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,8,22+wobble,0,Math.PI*2);ctx.stroke();
+ // rarity energy ring
+ const rarityIndex={COMMON:0,RARE:1,EPIC:2,LEGENDARY:3,MYTHIC:4,DIVINE:5,CELESTIAL:6,TRANSCENDENT:7}[d.rarity]||0;
+ if(rarityIndex>=2){ctx.save();ctx.globalAlpha=.34+.1*Math.sin(now*3+t.y*.04);ctx.strokeStyle=col;ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.beginPath();ctx.arc(0,0,17+rarityIndex*.45,(now*.55)%Math.PI*2,(now*.55)%Math.PI*2+Math.PI*1.35);ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+ // tower body by family
+ const n=t.name;
+ const cannonNames=['Cannon','Mortar','Bombard','RailCannon','InfernoCannon','VoidCannon','DivineCannon','CelestialCannon','LightCannon','MiniCannon','OldCannon','PocketCannon','StoneCannon','BurstCannon','SiegeCannon','TripleCannon','EternalCannon','HeavyCannon','FortressCannon','BarrageCannon','ArcCannon','TitanCannon','QuantumCannon','NovaCannon','SingularityCannon','ShockCannon','GravityCannon','HellfireCannon','OmegaCannon','ApocalypseCannon','WorldEndCannon'];
+ if(cannonNames.includes(n)){
+   ctx.fillStyle=col;ctx.beginPath();ctx.arc(0,2,14,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#ffffff88';ctx.lineWidth=2;ctx.stroke();
+   // armor plates
+   ctx.fillStyle='#0b1220';ctx.beginPath();ctx.arc(0,2,8,0,Math.PI*2);ctx.fill();
+   ctx.fillStyle=col;ctx.beginPath();ctx.arc(0,2,4,0,Math.PI*2);ctx.fill();
+   const barrel=n==='WorldEndCannon'?34:(n==='ApocalypseCannon'?31:(['OmegaCannon','EternalCannon'].includes(n)?30:(['LightCannon','MiniCannon','OldCannon','PocketCannon','StoneCannon'].includes(n)?17:(['Mortar','Bombard'].includes(n)?22:27))));
+   ctx.save();ctx.rotate(t.angle||0);ctx.fillStyle='#1d2a3e';ctx.strokeStyle=col;ctx.lineWidth=2;roundRect(-5,-barrel,10,barrel+9,4);ctx.fill();ctx.stroke();ctx.fillStyle=col;ctx.fillRect(-6,-barrel,12,5);ctx.fillStyle='#fff8';ctx.fillRect(-3,-barrel+1,6,2);ctx.restore();
+   ctx.fillStyle=col;ctx.globalAlpha=.28+.08*Math.sin(now*5+t.x);ctx.beginPath();ctx.arc(0,2,20,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+   if(['DivineCannon','CelestialCannon','EternalCannon','OmegaCannon','ApocalypseCannon','WorldEndCannon','TitanCannon','QuantumCannon','NovaCannon','SingularityCannon'].includes(n)){for(let i=0;i<6;i++){const a=now*(.7+i*.06)+i*Math.PI/3;ctx.fillStyle=col;ctx.beginPath();ctx.arc(Math.cos(a)*18,Math.sin(a)*18,2.2+(n==='WorldEndCannon'?1:0),0,Math.PI*2);ctx.fill()}}
+   if(['ShockCannon','GravityCannon','HellfireCannon','OmegaCannon','ApocalypseCannon','WorldEndCannon','BarrageCannon','ArcCannon','FortressCannon','TitanCannon','QuantumCannon','NovaCannon','SingularityCannon'].includes(n)){ctx.save();ctx.strokeStyle=col;ctx.globalAlpha=.7;ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,2,24+Math.sin(now*4+t.x)*2,0,Math.PI*2);ctx.stroke();ctx.restore()}
+ }else{
+   ctx.fillStyle=col;ctx.strokeStyle=selected===t?'#fff':col;ctx.lineWidth=2;
    if(['Sniper','Laser','Rocket','Star','Shadow'].includes(n)){
-     ctx.beginPath();ctx.moveTo(0,-19);ctx.lineTo(15,9);ctx.lineTo(0,7);ctx.lineTo(-15,9);ctx.closePath();ctx.fill();ctx.stroke();
-     ctx.fillStyle='#07101c';ctx.fillRect(-3,-10,6,16);ctx.fillStyle=col;ctx.fillRect(-1,-15,2,9);
+     ctx.beginPath();ctx.moveTo(0,-18);ctx.lineTo(15,9);ctx.lineTo(0,7);ctx.lineTo(-15,9);ctx.closePath();ctx.fill();ctx.stroke();
+     ctx.fillStyle='#07101c';ctx.fillRect(-3,-9,6,15);ctx.fillStyle=col;ctx.fillRect(-1,-14,2,8);
    }else if(['Tesla','Storm','Arcane','Plasma','Galaxy'].includes(n)){
-     ctx.beginPath();for(let i=0;i<8;i++){const a=-Math.PI/2+i*Math.PI/4,r=i%2?10:17,x=Math.cos(a)*r,y=Math.sin(a)*r;i?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.closePath();ctx.fill();ctx.stroke();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(0,0,5,0,Math.PI*2);ctx.fill();ctx.fillStyle=col;ctx.beginPath();ctx.arc(0,0,2.5,0,Math.PI*2);ctx.fill();
+     ctx.beginPath();for(let i=0;i<8;i++){const a=-Math.PI/2+i*Math.PI/4,r=i%2?10:16;const x=Math.cos(a)*r,y=Math.sin(a)*r;i?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.closePath();ctx.fill();ctx.stroke();
+     ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(0,0,5,0,Math.PI*2);ctx.fill();ctx.fillStyle=col;ctx.beginPath();ctx.arc(0,0,2.5,0,Math.PI*2);ctx.fill();
    }else{
      ctx.beginPath();ctx.arc(0,1,15,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#0a1220';ctx.beginPath();ctx.arc(0,1,7,0,Math.PI*2);ctx.fill();ctx.fillStyle=col;ctx.beginPath();ctx.arc(0,1,3.2+1.2*Math.sin(now*4+t.y),0,Math.PI*2);ctx.fill();
    }
    if(rarityIndex>=4){ctx.strokeStyle=col;ctx.globalAlpha=.5;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-18,-2);ctx.lineTo(-25,-2);ctx.moveTo(18,-2);ctx.lineTo(25,-2);ctx.stroke();ctx.globalAlpha=1}
  }
- // level badge + premium nameplate
+ // distinct faceplates for the new heavy cannon line
+ if(n==='FortressCannon'){ctx.fillStyle='#64748b';ctx.fillRect(-12,-2,24,7);ctx.fillStyle='#cbd5e1';ctx.fillRect(-8,-1,16,2);}
+ if(n==='BarrageCannon'){ctx.fillStyle='#f8fafc';for(let i=-1;i<=1;i++){ctx.fillRect(-3+i*7,-barrel*.62,4,8);}}
+ if(n==='ArcCannon'){ctx.strokeStyle='#67e8f9';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-13,-7);ctx.lineTo(-6,-2);ctx.lineTo(-12,3);ctx.moveTo(13,-7);ctx.lineTo(6,-2);ctx.lineTo(12,3);ctx.stroke();}
+ if(n==='TitanCannon'){ctx.fillStyle='#111827';ctx.fillRect(-13,6,26,5);ctx.fillStyle='#fde68a';ctx.fillRect(-8,7,16,2);}
+ if(n==='QuantumCannon'){ctx.strokeStyle='#a5f3fc';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(-12,-6);ctx.lineTo(0,-12);ctx.lineTo(12,-6);ctx.lineTo(0,0);ctx.closePath();ctx.stroke();}
+ if(n==='NovaCannon'){ctx.fillStyle='#f9a8d4';ctx.globalAlpha=.35;ctx.beginPath();ctx.arc(0,2,25+Math.sin(now*6)*2,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;}
+ // advanced cannon signature details
+ if(['FortressCannon','TitanCannon','QuantumCannon','NovaCannon','SingularityCannon'].includes(n)){ctx.save();ctx.strokeStyle=col;ctx.globalAlpha=.78;ctx.lineWidth=2;for(let i=0;i<3;i++){const rr=27+i*5;ctx.beginPath();ctx.arc(0,2,rr,now*(.45+i*.08),now*(.45+i*.08)+Math.PI*(.78+.12*i));ctx.stroke()}ctx.restore();}
+ if(['BarrageCannon','ArcCannon'].includes(n)){ctx.fillStyle=col;for(let i=0;i<4;i++){const a=now*1.4+i*Math.PI/2;ctx.beginPath();ctx.arc(Math.cos(a)*23,Math.sin(a)*23,2.4,0,Math.PI*2);ctx.fill();}}
+ if(n==='SingularityCannon'){ctx.strokeStyle='#fff';ctx.globalAlpha=.65;ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,2,12+4*Math.sin(now*5),0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;}
+ // level badge
  ctx.fillStyle='#07101c';ctx.strokeStyle='#fff9';ctx.lineWidth=1;ctx.beginPath();ctx.arc(14,-14,9,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#fff';ctx.font='bold 9px system-ui';ctx.textAlign='center';ctx.fillText(t.level,14,-11);
- if(towerSelected||['DIVINE','CELESTIAL','TRANSCENDENT'].includes(d.rarity)){ctx.font='bold 9px system-ui';ctx.fillStyle='#fff';ctx.textAlign='center';ctx.fillText(TKR[n]||n,0,36)}
+ // nameplate for selected / rare towers
+ if(towerSelected || ['DIVINE','CELESTIAL','TRANSCENDENT'].includes(d.rarity)){ctx.font='bold 9px system-ui';ctx.fillStyle='#fff';ctx.textAlign='center';ctx.fillText(TKR[n]||n,0,34)}
  ctx.restore();
 }
 function drawEnemy(e){
@@ -611,21 +514,7 @@ function drawEnemy(e){
 function path(r){ctx.beginPath();ctx.moveTo(...r[0]);for(const p of r.slice(1))ctx.lineTo(...p);ctx.stroke()}
 const enemyKR={normal:'일반 몬스터',fast:'빠른 몬스터',tank:'탱커',runner:'돌진병',mage:'마법사',crystal:'수정 괴물',shadow:'그림자',armored:'중갑병',slime:'슬라임',phantom:'팬텀',bomber:'폭탄병',healer:'치유병',berserker:'광전사',frost:'빙결괴물',poison:'독괴물',giant:'거대병',assassin:'암살자',necro:'망령술사',vampire:'흡혈귀',splitter:'분열괴물',shielder:'방패병',charger:'돌격괴물',summoner:'소환사',juggernaut:'저거너트',voidwalker:'공허보행자',ravager:'파괴자',reaper:'사신',colossus:'콜로서스',plaguebringer:'역병군주',annihilator:'소멸병기',dreadknight:'공포기사',worldbreaker:'월드브레이커',demon:'악마 보스',golem:'골렘 보스',beast:'야수 보스',titan:'타이탄 보스',lich:'리치 보스',dragonboss:'고대 드래곤',overlord:'오버로드',abyssTitan:'심연의 타이탄',executionerBoss:'처형자 보스',worldEater:'세계포식자'};
 const enemyDesc={normal:'기본형 몬스터',fast:'매우 빠르게 이동',tank:'높은 체력',runner:'빠른 돌진',mage:'강력한 마법형',crystal:'단단한 수정체',shadow:'은신 능력',armored:'피해 감소',slime:'튼튼한 점액 괴물',phantom:'빠른 유령',bomber:'죽을 때 폭발',healer:'주변 적 회복',berserker:'체력이 낮아지면 폭주',frost:'타워를 느리게 함',poison:'독 효과',giant:'거대한 체력',assassin:'주기적 은신',necro:'한 번 부활',vampire:'흡혈 능력',splitter:'죽을 때 분열',shielder:'전방 피해 감소',charger:'초고속 돌진',summoner:'지원형 몬스터',demon:'악마 보스',golem:'골렘 보스',beast:'야수 보스',titan:'초대형 보스',lich:'강력한 마법 보스',dragonboss:'최종급 드래곤 보스'};
-let enemyBookSignature='';
-function renderEnemyBook(force=false){
- const all=Object.keys(enemyDefs).concat(Object.keys(bossDefs));
- const seenKeys=[];
- for(const e of enemies)if(!seenKeys.includes(e.kind))seenKeys.push(e.kind);
- seenKeys.sort();
- const sig=seenKeys.join('|');
- if(!force&&sig===enemyBookSignature)return;
- enemyBookSignature=sig;
- const seen=new Set(seenKeys);
- const count=document.getElementById('enemyBookCount'),box=document.getElementById('enemyBook');
- if(!count||!box)return;
- count.textContent=seen.size+' / '+all.length;
- box.innerHTML=all.map(k=>{const boss=!!bossDefs[k];return `<button class="enemyCard" onclick="showEnemy('${k}')"><span class="enemyDot" style="color:${enemyColors[k]};background:${enemyColors[k]}"></span><b>${enemyKR[k]||k}</b>${boss?' 👑':''}<small>${enemyDesc[k]||EDesc[k]||'적 유닛'} · ${seen.has(k)?'발견':'미발견'}</small></button>`}).join('');
-}
+function renderEnemyBook(){const all=Object.keys(enemyDefs).concat(Object.keys(bossDefs));const seen=new Set(all.filter(k=>enemies.some(e=>e.kind===k)));document.getElementById('enemyBookCount').textContent=seen.size+' / '+all.length;document.getElementById('enemyBook').innerHTML=all.map(k=>{const boss=!!bossDefs[k];return `<button class="enemyCard" onclick="showEnemy('${k}')"><span class="enemyDot" style="color:${enemyColors[k]};background:${enemyColors[k]}"></span><b>${enemyKR[k]||k}</b>${boss?' 👑':''}<small>${enemyDesc[k]||EDesc[k]||'적 유닛'} · ${seen.has(k)?'발견':'미발견'}</small></button>`}).join('')}
 function showEnemy(k){const d=(bossDefs[k]||enemyDefs[k]);if(!d)return;const boss=!!bossDefs[k];const extra=EDesc[k]?(' · '+EDesc[k]):'';notify('👾 '+enemyKR[k]+' · '+(boss?'보스 · ':'')+'기본 HP '+d[0]+' · 속도 '+d[1]+' · 보상 '+d[2]+'G'+extra)}
 function renderInventory(){
  const groups=new Map();
@@ -658,15 +547,13 @@ function selectCard(n,level=1){
  sellMode=false;
  updateButtons();renderInventory();updateUI();
  clearTimeout(selectCard.t);
- const session=gameSessionId;
  selectCard.t=setTimeout(()=>{
-   if(session===gameSessionId&&selected&&selected.name===item.name&&selected.level===item.level){selected=null;renderInventory();updateUI()}
+   if(selected&&selected.name===item.name&&selected.level===item.level){selected=null;renderInventory();updateUI()}
  },6000);
 }
 function updateUI(){const p=stagePower();document.getElementById('stage').textContent=stage;document.getElementById('score').textContent=score.toLocaleString();document.getElementById('gold').textContent=gold.toLocaleString();document.getElementById('hp').textContent=hp;document.getElementById('cost').textContent=cost();document.getElementById('enemyCount').textContent=enemies.length+' / '+waveTarget;document.getElementById('threat').textContent=p.toFixed(1)+'× · '+threatTitle();const mi=mapIndexForStage(stage),m=currentMap();document.getElementById('mapName').textContent='🗺️ MAP '+(mi+1)+' · '+m.name;document.getElementById('mapRange').textContent=(mi*10+1)+'~'+(mi+1)*10;document.getElementById('mapProgress').style.width=(stage===0?0:(((stage-1)%10+1)/10*100))+'%';document.getElementById('mapSub').textContent=stage>=101?'101스테이지부터 1번 맵 → 2번 맵 → … 순환 중 · 길/기지는 고정 · 적 난이도는 계속 상승':'100스테이지까지 10개 맵 · 10스테이지마다 배경 전환 · 길/기지는 고정 · 스테이지가 오를수록 적 강화';const si=document.getElementById('selectedInfo');if(selected){const d=T[selected.name];si.textContent=`설치: ${TKR[selected.name]||selected.name} · ${rarityKR[d.rarity]} · Lv.${selected.level} · 맵을 클릭해 설치`;si.hidden=false}else if(selectedTower){const d=T[selectedTower.name];const dmg=Math.round(d.damage*(1+(selectedTower.level-1)*.28));si.textContent=`🎯 ${TKR[selectedTower.name]||selectedTower.name} · ${rarityKR[d.rarity]} · Lv.${selectedTower.level} · 공격 ${dmg} · 사거리 ${d.range} · 쿨 ${d.cool}s`;si.hidden=false}else{si.textContent='';si.hidden=true}updateButtons()}
-let modalPausedGame=false;
-function openModal(title,body){document.getElementById('modalTitle').textContent=title;document.getElementById('modalBody').innerHTML=body;document.getElementById('modal').hidden=false;if(running&&!paused){paused=true;modalPausedGame=true;updateButtons();}}
-function closeModal(){document.getElementById('modal').hidden=true;if(modalPausedGame&&running){paused=false;modalPausedGame=false;updateButtons();}}
+function openModal(title,body){document.getElementById('modalTitle').textContent=title;document.getElementById('modalBody').innerHTML=body;document.getElementById('modal').hidden=false}
+function closeModal(){document.getElementById('modal').hidden=true}
 document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
 function openRates(){const rr=currentRates();let h='<table class="rateTable"><tr><th>등급</th><th>확률</th></tr>'+Object.entries(rr).map(([k,v])=>`<tr><td class="${k.toLowerCase()}">${rarityKR[k]}</td><td>${v}%</td></tr>`).join('')+'</table><p class="help">현재 '+stage+' 스테이지 기준입니다. 20스테이지마다 등급 확률이 변경됩니다. 고등급 대포는 같은 등급 안에서도 추가 희귀 가중치가 적용됩니다. 뽑기 가격은 1000G에서 시작해 10스테이지마다 250G씩 올라갑니다.</p>';openModal('🎲 스테이지별 뽑기 확률',h)}
 function getPlayerName(){return (document.getElementById('name').value||'PLAYER').trim().slice(0,16)||'PLAYER'}
@@ -684,15 +571,6 @@ function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':
 document.getElementById('name').addEventListener('input',savePlayerName);fetchRanking().catch(()=>renderMiniRanking({ranking:[]}));setInterval(()=>{if(!document.getElementById('modal').hidden)return;fetchRanking().catch(()=>{})},15000);
 c.addEventListener('click',e=>{const r=c.getBoundingClientRect();const x=(e.clientX-r.left)*c.width/r.width,y=(e.clientY-r.top)*c.height/r.height;const hit=towers.slice().reverse().find(t=>Math.hypot(t.x-x,t.y-y)<30);if(sellMode){if(hit){selectedTower=hit;sellSelected()}else notify('💰 판매 모드: 판매할 타워를 클릭하세요.');return}if(selected){placeTower(selected.name,x,y,selected.level);return}if(hit){selectedTower=hit;notify('🎯 '+TKR[hit.name]+' Lv.'+hit.level);updateUI();return}selectedTower=null;updateUI()});
 c.addEventListener('contextmenu',e=>{e.preventDefault();selected=null;selectedTower=null;renderInventory();updateUI()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();selected=null;selectedTower=null;renderInventory();updateUI();return}if(e.key==='g'||e.key==='G')gacha();else if(e.key==='h'||e.key==='H')toggle('autoWave');else if(e.key==='f'||e.key==='F')toggle('autoFusion');else if(e.key==='v'||e.key==='V')toggle('sellMode');else if(e.key==='p'||e.key==='P')togglePause();else if(e.key==='1')setSpeed(1);else if(e.key==='2')setSpeed(1.5);else if(e.key==='3')setSpeed(2);else if(e.key==='4')setSpeed(2.5);else if(e.key==='5')setSpeed(3)});
-document.getElementById('overlay')?.addEventListener('click',e=>{if(e.target===document.getElementById('overlay')){try{notify('🎮 가운데의 게임 시작 버튼을 눌러주세요.')}catch(_){}}}); document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.code==='NumpadEnter')&&!running){try{startGame()}catch(err){console.error(err);notify('⚠️ 게임 시작 오류: '+(err?.message||err));}}},{passive:true}); function loop(t){
- const dt=Math.min(.05,Math.max(0,((t-last)||0)/1000));last=t;
- try{update(dt)}catch(err){stabilityError(err,'game update')}
- try{draw()}catch(err){stabilityError(err,'game render')}
- requestAnimationFrame(loop)
-}
-if(typeof window!=='undefined'&&window.addEventListener){
- window.addEventListener('error',e=>stabilityError(e.error||new Error(e.message||'runtime error'),'window'));
- window.addEventListener('unhandledrejection',e=>stabilityError(e.reason||new Error('promise rejection'),'promise'));
-} try{updateButtons();updateUI();renderInventory();renderEnemyBook(true);}catch(err){console.error(err);try{notify('⚠️ 초기화 오류: '+(err?.message||err))}catch(_){}} const __startBtn=document.getElementById('ovBtn'); if(__startBtn){__startBtn.disabled=false;__startBtn.style.pointerEvents='auto';__startBtn.style.position='relative';__startBtn.style.zIndex='100';} requestAnimationFrame(loop);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();selected=null;selectedTower=null;renderInventory();updateUI();return}if(e.key==='g'||e.key==='G')gacha();else if(e.key==='h'||e.key==='H')toggle('autoWave');else if(e.key==='f'||e.key==='F')toggle('autoFusion');else if(e.key==='v'||e.key==='V')toggle('sellMode');else if(e.key==='p'||e.key==='P')togglePause();else if(e.key==='1')setSpeed(1);else if(e.key==='2')setSpeed(1.5);else if(e.key==='3')setSpeed(2);else if(e.key==='4')setSpeed(2.5);else if(e.key==='5')setSpeed(3);else if(e.key==='Escape'){selected=null;renderInventory()}});
+document.getElementById('overlay')?.addEventListener('click',e=>{if(e.target===document.getElementById('overlay')){try{notify('🎮 가운데의 게임 시작 버튼을 눌러주세요.')}catch(_){}}}); document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.code==='NumpadEnter')&&!running){try{startGame()}catch(err){console.error(err);notify('⚠️ 게임 시작 오류: '+(err?.message||err));}}},{passive:true}); let first=true;function loop(t){const dt=Math.min(.05,(t-last)/1000||0);last=t;try{update(dt);draw();}catch(err){console.error('LUCKY DEFENSE loop error:',err);try{notify('⚠️ 게임 오류가 발생해 안전 복구했습니다. '+(err?.message||''))}catch(_){}}requestAnimationFrame(loop)} try{updateButtons();updateUI();renderInventory();}catch(err){console.error(err);try{notify('⚠️ 초기화 오류: '+(err?.message||err))}catch(_){}} const __startBtn=document.getElementById('ovBtn'); if(__startBtn){__startBtn.disabled=false;__startBtn.style.pointerEvents='auto';__startBtn.style.position='relative';__startBtn.style.zIndex='100';} requestAnimationFrame(loop);
 </script></body></html>
