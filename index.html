@@ -13,7 +13,17 @@
 .rankMiniRow.me{background:#182742;border-radius:8px;outline:1px solid #3f6aa5}.rankMiniRow .num{font-weight:950;text-align:center;color:#90a4c2}.rankMiniRow:nth-child(1) .num{color:#f9d65c}.rankMiniRow:nth-child(2) .num{color:#d5dbe8}.rankMiniRow:nth-child(3) .num{color:#d99b69}.rankMiniRow .who{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rankMiniRow .who small{display:block;color:#6f819e;font-size:9px;margin-top:1px}.rankMiniRow .pts{text-align:right;font-weight:900}.rankMiniFoot{display:flex;justify-content:space-between;gap:8px;padding:8px 10px;color:#8091ac;font-size:9px;border-top:1px solid #1e2b43}
 .rankHero{display:grid;grid-template-columns:1.08fr 1fr 1.08fr;gap:8px;align-items:end;margin:8px 0 12px}.rankPodium{position:relative;min-height:110px;border:1px solid #2a3b59;border-radius:14px;background:linear-gradient(145deg,#0b1424,#111d32);padding:12px 9px 10px;text-align:center;overflow:hidden}.rankPodium::after{content:'';position:absolute;inset:auto -30% -55% -30%;height:100px;background:radial-gradient(circle,#60a5fa18,transparent 68%);pointer-events:none}.rankPodium.first{min-height:132px;border-color:#bca34c66;box-shadow:0 0 28px #cdbb5a12}.rankPodium.second{transform:translateY(9px)}.rankPodium.third{transform:translateY(14px)}.rankMedal{font-size:26px;line-height:1}.rankPodium .place{font-size:10px;color:#8292ab;font-weight:900;letter-spacing:1px;margin:4px 0}.rankPodium .pname{font-size:12px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rankPodium .pscore{font-size:18px;font-weight:950;margin-top:4px}.rankPodium .pmeta{font-size:9px;color:#6f819e;margin-top:3px}.rankSummary{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}.rankStat{background:#09111f;border:1px solid #1e2b45;border-radius:10px;padding:8px}.rankStat span{display:block;color:#6f819e;font-size:9px}.rankStat b{display:block;font-size:14px;margin-top:2px}.rankFilter{display:flex;gap:6px;align-items:center;margin:8px 0}.rankFilter input{flex:1;min-width:0;background:#09111f;border:1px solid #253653;border-radius:9px;padding:8px 9px;color:#fff;font-size:11px}.rankTag{display:inline-flex;align-items:center;gap:4px;padding:5px 8px;border:1px solid #2b3b57;border-radius:99px;background:#0b1424;color:#91a4c0;font-size:9px;white-space:nowrap}.rankTable{border:1px solid #22314c;border-radius:12px;overflow:hidden}.rankTableHead,.rankTableRow{display:grid;grid-template-columns:45px 1fr 105px 62px 62px;gap:6px;align-items:center}.rankTableHead{padding:9px 10px;background:#0a1220;color:#6f819e;font-size:9px;font-weight:900;letter-spacing:.5px}.rankTableRow{padding:9px 10px;border-top:1px solid #1d2941;font-size:11px}.rankTableRow.me{background:linear-gradient(90deg,#152a48,#101b2d)}.rankTableRow .rnum{font-weight:950}.rankTableRow .rname{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rankTableRow .rname small{display:block;color:#687b98;font-size:8px;margin-top:2px}.rankTableRow .rscore{font-weight:950;text-align:right}.rankTableRow .rmeta{text-align:right;color:#9aabc3}.rankEmpty{padding:26px;text-align:center;color:#7386a2;font-size:11px}.rankModalFoot{display:flex;justify-content:space-between;gap:8px;margin-top:10px;padding-top:9px;border-top:1px solid #1d2941;color:#6f819e;font-size:9px}.rankRefresh{float:right}
 @media(max-width:560px){.rankHero{grid-template-columns:1fr}.rankPodium.second,.rankPodium.third{transform:none}.rankSummary{grid-template-columns:1fr 1fr}.rankTableHead,.rankTableRow{grid-template-columns:36px 1fr 85px 50px 50px}}
-</style></head><body><div class="app">
+</style>
+<style id="lucky-v28-style">
+#bgmToggle{
+  position:fixed;right:18px;top:18px;z-index:9999;
+  border:1px solid #5eead4aa;background:#07111de8;color:#eaffff;
+  border-radius:12px;padding:9px 13px;font-weight:800;font-size:12px;
+  box-shadow:0 8px 28px #0008;cursor:pointer;backdrop-filter:blur(8px);
+}
+#bgmToggle:hover{transform:translateY(-1px);border-color:#67e8f9}
+</style>
+</head><body><div class="app">
 <div class="top"><div class="brand">LUCKY DEFENSE<small>LUCKY GAME STUDIO · WEB EDITION</small></div><div class="topRight"><input id="name" class="name" maxlength="16" placeholder="닉네임"><button onclick="openRank()">🏆 랭킹</button></div></div>
 <div class="layout"><div class="card gameCard"><div class="gameWrap"><canvas id="game" class="game" width="960" height="600"></canvas><div id="toast" class="toast" hidden></div><div id="overlay" class="overlay"><div class="overlayBox"><h1 id="ovTitle">LUCKY DEFENSE</h1><p id="ovText">운빨로 타워를 뽑고 몰려오는 몬스터를 막아보세요!</p><button id="ovBtn" type="button" onclick="try{window.startGame()}catch(e){var t=document.getElementById('ovText');if(t)t.textContent='게임 시작 오류: '+(e&&e.message?e.message:e)}">🎮 게임 시작</button></div></div></div></div>
 <aside class="card side"><div class="statgrid"><div class="stat"><span>STAGE</span><b id="stage">0</b></div><div class="stat"><span>SCORE</span><b id="score">0</b></div><div class="stat"><span>GOLD</span><b id="gold">550</b></div><div class="stat"><span>BASE HP</span><b id="hp">20</b></div><div class="stat"><span>MONSTERS</span><b id="enemyCount">0</b></div><div class="stat"><span>THREAT</span><b id="threat">1.0×</b></div></div>
@@ -767,4 +777,278 @@ if(typeof window!=='undefined'&&window.addEventListener){
  window.addEventListener('error',e=>stabilityError(e.error||new Error(e.message||'runtime error'),'window'));
  window.addEventListener('unhandledrejection',e=>stabilityError(e.reason||new Error('promise rejection'),'promise'));
 } try{updateButtons();updateUI();renderInventory();renderEnemyBook(true);}catch(err){console.error(err);try{notify('⚠️ 초기화 오류: '+(err?.message||err))}catch(_){}} const __startBtn=document.getElementById('ovBtn'); if(__startBtn){__startBtn.disabled=false;__startBtn.style.pointerEvents='auto';__startBtn.style.position='relative';__startBtn.style.zIndex='100';} requestAnimationFrame(loop);
-</script></body></html>
+</script><button id="bgmToggle" type="button">🎵 BGM ON</button>
+<script id="lucky-v28-enhancements">
+(() => {
+  // ----- BGM -----
+  const bgm = new Audio('/bgm_lucky_defense.wav');
+  bgm.loop = true;
+  bgm.volume = 0.22;
+  let bgmOn = true;
+
+  async function startBGM(){
+    if(!bgmOn) return;
+    try { await bgm.play(); } catch(_) {}
+  }
+  window.startBGM = startBGM;
+
+  const bgmBtn = document.getElementById('bgmToggle');
+  function syncBGMButton(){
+    if(bgmBtn) bgmBtn.textContent = bgmOn ? '🎵 BGM ON' : '🔇 BGM OFF';
+  }
+  if(bgmBtn){
+    bgmBtn.addEventListener('click', async () => {
+      bgmOn = !bgmOn;
+      if(bgmOn) await startBGM();
+      else bgm.pause();
+      syncBGMButton();
+    });
+    syncBGMButton();
+  }
+  document.addEventListener('click', () => startBGM(), {once:true});
+
+  // Start music on the actual game-start action as well.
+  const originalStartGame = window.startGame;
+  if(typeof originalStartGame === 'function'){
+    window.startGame = function(){
+      startBGM();
+      return originalStartGame.apply(this, arguments);
+    };
+  }
+
+  // ----- Shared drawing helpers -----
+  function poly(points, fill, stroke, width=1){
+    ctx.beginPath();
+    ctx.moveTo(points[0][0], points[0][1]);
+    for(let i=1;i<points.length;i++) ctx.lineTo(points[i][0],points[i][1]);
+    ctx.closePath();
+    if(fill){ctx.fillStyle=fill;ctx.fill();}
+    if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke();}
+  }
+  function ring(x,y,r,color,alpha=.6,w=2){
+    ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle=color;ctx.lineWidth=w;
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.stroke();ctx.restore();
+  }
+
+  // ----- Tower visual upgrade -----
+  const oldDrawTower = window.drawTower || drawTower;
+  if(typeof oldDrawTower === 'function'){
+    drawTower = function(t){
+      oldDrawTower(t);
+      const d=T[t.name]; if(!d) return;
+      const col=rgb(d.color), rarity=d.rarity, n=t.name;
+      const ri={COMMON:0,RARE:1,EPIC:2,LEGENDARY:3,MYTHIC:4,DIVINE:5,CELESTIAL:6,TRANSCENDENT:7}[rarity]||0;
+      const now=performance.now()/1000;
+      ctx.save();
+      ctx.translate(t.x,t.y);
+
+      // Detailed mechanical base.
+      ctx.globalAlpha=.95;
+      ctx.fillStyle='#111827';
+      ctx.strokeStyle=col+'aa';
+      ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.arc(0,8,20,0,Math.PI*2);ctx.fill();ctx.stroke();
+      for(let a=0;a<Math.PI*2;a+=Math.PI/4){
+        ctx.fillStyle='#334155';
+        ctx.beginPath();ctx.arc(Math.cos(a)*16,8+Math.sin(a)*12,2.2,0,Math.PI*2);ctx.fill();
+      }
+
+      // Tower-specific silhouette details.
+      if(n==='Cannon'||n==='Bombard'||n==='Mortar'||n==='RailCannon'||n==='SiegeCannon'){
+        ctx.save();ctx.rotate(t.angle||0);
+        ctx.fillStyle='#263241';ctx.strokeStyle=col;ctx.lineWidth=2;
+        ctx.beginPath();ctx.roundRect(-3,-6,28,12,5);ctx.fill();ctx.stroke();
+        ctx.fillStyle='#0b1220';ctx.beginPath();ctx.arc(24,0,5,0,Math.PI*2);ctx.fill();
+        ctx.restore();
+      }else if(n==='Sniper'||n==='Laser'){
+        ctx.save();ctx.rotate(t.angle||0);
+        ctx.strokeStyle=col;ctx.lineWidth=3;
+        ctx.beginPath();ctx.moveTo(-4,0);ctx.lineTo(30,0);ctx.stroke();
+        ctx.fillStyle='#dbeafe';ctx.fillRect(8,-3,6,6);
+        ctx.restore();
+      }else if(n==='Tesla'||n==='Storm'){
+        for(let j=0;j<3;j++){
+          const a=now*2+j*Math.PI*2/3;
+          ring(Math.cos(a)*15,Math.sin(a)*15,4,col,.8,1.5);
+        }
+      }else if(n==='Medic'){
+        ctx.fillStyle='#f8fafc';ctx.fillRect(-12,-4,24,8);ctx.fillRect(-4,-12,8,24);
+        ctx.strokeStyle='#22c55e';ctx.lineWidth=2;ctx.strokeRect(-12,-4,24,8);ctx.strokeRect(-4,-12,8,24);
+      }else if(n==='Dragon'||n==='DragonCannon'){
+        ctx.fillStyle='#7f1d1d';ctx.strokeStyle=col;ctx.lineWidth=2;
+        poly([[-16,4],[-28,-9],[-10,-5],[-4,-17],[4,-6],[22,-12],[14,2],[24,11],[6,8],[0,18],[-8,8]], '#7f1d1d', col, 2);
+        ctx.fillStyle='#fef08a';ctx.beginPath();ctx.arc(7,-3,2.5,0,Math.PI*2);ctx.fill();
+        ctx.strokeStyle='#fb923c';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(20,2);ctx.lineTo(30,2);ctx.stroke();
+      }else if(ri>=4){
+        // High-rarity core.
+        ctx.shadowColor=col;ctx.shadowBlur=18;
+        ctx.fillStyle=col;
+        ctx.beginPath();ctx.arc(0,2,7+2*Math.sin(now*5),0,Math.PI*2);ctx.fill();
+        ctx.shadowBlur=0;
+        for(let j=0;j<3;j++){
+          const a=now*(1.1+j*.15)+j*2.1;
+          ring(Math.cos(a)*12,2+Math.sin(a)*12,3,col,.75,1.5);
+        }
+      }else{
+        // Universal power core.
+        ctx.fillStyle=col;ctx.shadowColor=col;ctx.shadowBlur=10;
+        ctx.beginPath();ctx.arc(0,2,4.5,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;
+      }
+
+      // Rarity crown / halo.
+      if(ri>=3){
+        ctx.strokeStyle=col;ctx.globalAlpha=.5+.2*Math.sin(now*4);
+        ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(0,-1,25+ri,now,now+Math.PI*1.5);ctx.stroke();
+      }
+
+      ctx.restore();
+    };
+    window.drawTower = drawTower;
+  }
+
+  // ----- Enemy visual upgrade -----
+  const oldDrawEnemy = window.drawEnemy || drawEnemy;
+  if(typeof oldDrawEnemy === 'function'){
+    drawEnemy = function(e){
+      oldDrawEnemy(e);
+      const col=enemyColors[e.kind]||'#ef4444';
+      const r=e.boss?Math.max(22,e.radius):e.radius;
+      const now=performance.now()/1000;
+      ctx.save();ctx.translate(e.x,e.y);
+
+      // Eyes make every enemy feel more like a character.
+      const eyeY=-r*.18, eyeX=r*.34;
+      ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-eyeX,eyeY,Math.max(2,r*.12),0,Math.PI*2);ctx.arc(eyeX,eyeY,Math.max(2,r*.12),0,Math.PI*2);ctx.fill();
+      ctx.fillStyle=col;ctx.beginPath();ctx.arc(-eyeX,eyeY,Math.max(1,r*.065),0,Math.PI*2);ctx.arc(eyeX,eyeY,Math.max(1,r*.065),0,Math.PI*2);ctx.fill();
+
+      // Type accents.
+      if(['tank','armored','juggernaut','colossus','annihilator'].includes(e.kind)){
+        ctx.strokeStyle='#cbd5e1';ctx.lineWidth=2;
+        ctx.beginPath();ctx.moveTo(-r*.8,-r*.65);ctx.lineTo(0,-r*.95);ctx.lineTo(r*.8,-r*.65);ctx.stroke();
+      }else if(['mage','necro','lich','chronolord'].includes(e.kind)){
+        ctx.strokeStyle='#c4b5fd';ctx.lineWidth=2;
+        ctx.beginPath();ctx.arc(0,0,r+5,now,now+Math.PI*1.2);ctx.stroke();
+        ctx.fillStyle='#ede9fe';ctx.beginPath();ctx.arc(0,-r-3,3,0,Math.PI*2);ctx.fill();
+      }else if(['fast','runner','charger','reaper','assassin'].includes(e.kind)){
+        ctx.strokeStyle=col;ctx.lineWidth=2;ctx.globalAlpha=.8;
+        ctx.beginPath();ctx.moveTo(-r*1.2,0);ctx.lineTo(-r*2.0,-r*.25);ctx.moveTo(-r*1.1,r*.25);ctx.lineTo(-r*1.8,r*.55);ctx.stroke();
+      }else if(['crystal','crystalwarden','voidwalker','voidbeast'].includes(e.kind)){
+        ctx.strokeStyle=col;ctx.lineWidth=2;ctx.globalAlpha=.75;
+        poly([[-r*.55,r*.6],[0,-r*1.15],[r*.55,r*.6]],null,col,2);
+      }
+
+      // Boss crowns and animated aura.
+      if(e.boss){
+        ctx.strokeStyle=col;ctx.shadowColor=col;ctx.shadowBlur=16;ctx.lineWidth=2;
+        ctx.beginPath();ctx.arc(0,0,r+10+Math.sin(now*3)*2,0,Math.PI*2);ctx.stroke();
+        ctx.shadowBlur=0;ctx.fillStyle='#facc15';
+        poly([[-r*.55,-r*1.1],[-r*.2,-r*1.65],[0,-r*1.15],[r*.2,-r*1.65],[r*.55,-r*1.1]],'#facc15','#fff7',1);
+      }
+
+      ctx.restore();
+    };
+    window.drawEnemy = drawEnemy;
+  }
+
+  // ----- Map scenery: background-only, route stays fixed -----
+  const oldDraw = draw;
+  draw = function(){
+    oldDraw();
+    const mi = mapIndexForStage();
+    const th = theme();
+    const now = performance.now()/1000;
+
+    // Paint scenery only in the map background margins, never altering route coordinates.
+    ctx.save();
+    ctx.globalAlpha=.75;
+
+    if(mi===0){ // Emerald plains
+      for(let i=0;i<24;i++){
+        const x=(i*137+37)%920, y=40+(i*83)%510;
+        ctx.fillStyle='#2f8f62';
+        ctx.beginPath();ctx.arc(x,y,5+(i%3),0,Math.PI*2);ctx.fill();
+        ctx.strokeStyle='#6ee7b7';ctx.lineWidth=1;
+        ctx.beginPath();ctx.moveTo(x,y+3);ctx.lineTo(x-5,y+10);ctx.moveTo(x,y+3);ctx.lineTo(x+5,y+10);ctx.stroke();
+      }
+    }else if(mi===1){ // Lava
+      ctx.strokeStyle='#ff6b35';ctx.lineWidth=2;
+      for(let i=0;i<16;i++){
+        const x=(i*181+60)%920,y=45+(i*97)%500;
+        ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+10,y+12);ctx.lineTo(x-2,y+26);ctx.lineTo(x+13,y+40);ctx.stroke();
+      }
+      for(let i=0;i<8;i++){ctx.fillStyle='#7f1d1d';ctx.beginPath();ctx.arc((i*131+80)%920,70+(i*71)%470,10,0,Math.PI*2);ctx.fill();}
+    }else if(mi===2){ // Glacier
+      for(let i=0;i<18;i++){
+        const x=(i*151+30)%920,y=35+(i*61)%520;
+        poly([[x,y+20],[x+10,y-18],[x+20,y+20]],'#67e8f955','#a5f3fc',1.5);
+      }
+    }else if(mi===3){ // Desert ruins
+      ctx.strokeStyle='#e7c66b';ctx.lineWidth=2;
+      for(let i=0;i<10;i++){
+        const x=(i*179+50)%900,y=55+(i*91)%480;
+        ctx.strokeRect(x,y,22,18);
+        ctx.beginPath();ctx.moveTo(x+4,y);ctx.lineTo(x+11,y-9);ctx.lineTo(x+18,y);ctx.stroke();
+      }
+      ctx.fillStyle='#d6b36a';
+      for(let i=0;i<9;i++)ctx.fillRect((i*103+22)%920,40+(i*57)%520,3,16);
+    }else if(mi===4){ // Magic forest
+      for(let i=0;i<17;i++){
+        const x=(i*157+45)%920,y=40+(i*77)%500;
+        ctx.fillStyle='#3b1f58';ctx.fillRect(x-4,y,8,24);
+        poly([[x-22,y+3],[x,y-28],[x+22,y+3]],'#5b2a82','#c084fc',1);
+        ring(x,y-10,8,'#d8b4fe',.45,1.2);
+      }
+    }else if(mi===5){ // Sky fortress
+      for(let i=0;i<14;i++){
+        const x=(i*173+30)%920,y=45+(i*89)%500;
+        ctx.strokeStyle='#60a5fa';ctx.lineWidth=2;ctx.strokeRect(x,y,28,18);
+        ctx.fillStyle='#334155';ctx.fillRect(x+5,y+5,5,5);ctx.fillRect(x+18,y+5,5,5);
+      }
+      for(let i=0;i<7;i++){ctx.fillStyle='#e2e8f055';ctx.beginPath();ctx.arc((i*137+80)%920,55+(i*43)%200,18,0,Math.PI*2);ctx.fill();}
+    }else if(mi===6){ // Crystal cave
+      for(let i=0;i<22;i++){
+        const x=(i*97+25)%920,y=35+(i*71)%520;
+        poly([[x,y+24],[x+7,y-20],[x+15,y+24]],'#22d3ee44','#67e8f9',1.2);
+      }
+    }else if(mi===7){ // Neon city
+      for(let i=0;i<16;i++){
+        const x=(i*113+15)%920,y=35+(i*67)%500;
+        ctx.fillStyle='#111827';ctx.fillRect(x,y,30,45);
+        ctx.strokeStyle=(i%2?'#38bdf8':'#a78bfa');ctx.lineWidth=1.5;ctx.strokeRect(x,y,30,45);
+        ctx.fillStyle=i%2?'#38bdf8':'#f0abfc';
+        for(let yy=y+8;yy<y+38;yy+=10)ctx.fillRect(x+7,yy,5,4);
+      }
+    }else if(mi===8){ // Abyss altar
+      ctx.strokeStyle='#f472b6';ctx.lineWidth=2;
+      for(let i=0;i<7;i++){
+        const x=100+i*125,y=90+(i%2)*350;
+        ring(x,y,20+5*Math.sin(now+i), '#f472b6',.55,2);
+        ring(x,y,8,'#fb7185',.5,1);
+      }
+      ctx.fillStyle='#3b0a2e';
+      for(let i=0;i<8;i++)poly([[70+i*105,530],[85+i*105,490],[100+i*105,530]],'#4c164f','#f472b6',1);
+    }else{ // Final gate
+      ctx.strokeStyle='#a78bfa';ctx.lineWidth=3;
+      ctx.strokeRect(50,45,85,55);ctx.strokeRect(825,420,85,55);
+      ctx.fillStyle='#a78bfa22';ctx.fillRect(55,50,75,45);
+      ctx.fillRect(830,425,75,45);
+      for(let i=0;i<12;i++){
+        const x=35+(i*77)%890,y=35+(i*113)%520;
+        ring(x,y,5+2*Math.sin(now+i),'#a78bfa',.35,1);
+      }
+    }
+
+    // Animated ambient particles on every map.
+    ctx.globalAlpha=.35;
+    for(let i=0;i<22;i++){
+      const x=(i*173+now*12*(i%3+1))%930;
+      const y=(i*97+Math.sin(now+i)*12+500)%570;
+      ctx.fillStyle=th.accent;
+      ctx.fillRect(x,y,2,2);
+    }
+    ctx.restore();
+  };
+  window.draw = draw;
+})();
+</script>
+</body></html>
