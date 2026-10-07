@@ -24,11 +24,14 @@ function betterThan(oldBest, candidate){
     (candidate.score === oldBest.score && (candidate.stage > oldBest.stage ||
       (candidate.stage === oldBest.stage && candidate.kills > oldBest.kills)));
 }
+function compareScores(x,y){
+  return y.score - x.score || y.stage - x.stage || y.kills - x.kills || (x.time || 0) - (y.time || 0) || String(x.playerId||'').localeCompare(String(y.playerId||''));
+}
 function sortScores(a){
-  return a.sort((x,y) => y.score - x.score || y.stage - x.stage || y.kills - x.kills || (x.time || 0) - (y.time || 0));
+  return a.sort(compareScores);
 }
 function rankedRows(rows){
-  return rows.map((row, i) => ({...row, rank:i+1}));
+  return rows.slice().sort(compareScores).map((row, i) => ({...row, rank:i+1}));
 }
 function normalizeScore(raw){
   return {
@@ -79,9 +82,33 @@ async function initPostgres(){
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
     `);
-    // v24: 기존 JSON 랭킹이 남아 있으면 DB가 비어 있을 때 한 번만 이전합니다.
+    await pgPool.query(`
+      CREATE TABLE IF NOT EXISTS lucky_score_history (
+        id BIGSERIAL PRIMARY KEY,
+        player_id TEXT NOT NULL,
+        name TEXT NOT NULL,
+        score BIGINT NOT NULL,
+        stage INTEGER NOT NULL,
+        kills INTEGER NOT NULL,
+        played_at BIGINT NOT NULL,
+        is_new_best BOOLEAN NOT NULL DEFAULT FALSE,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+    // v29: 랭킹 시스템을 한 번만 초기화합니다.
+    // 별도의 Render DB 삭제 없이 DB 안에 완료 마커를 남기므로 재시작/재배포 때 다시 초기화되지 않습니다.
+    await pgPool.query(`CREATE TABLE IF NOT EXISTS lucky_ranking_meta (key TEXT PRIMARY KEY, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())`);
+    const resetMarker = await pgPool.query(`SELECT 1 FROM lucky_ranking_meta WHERE key='v29_ranking_reset' LIMIT 1`);
+    let didReset = false;
+    if(resetMarker.rowCount === 0){
+      await pgPool.query('TRUNCATE TABLE lucky_scores');
+      await pgPool.query(`INSERT INTO lucky_ranking_meta(key) VALUES('v29_ranking_reset') ON CONFLICT DO NOTHING`);
+      didReset = true;
+      console.log('🧹 v29: PostgreSQL 온라인 랭킹을 1회 초기화했습니다.');
+    }
+    // 초기화 이후에는 이전 scores.json 기록을 다시 가져오지 않습니다.
     const count = await pgPool.query('SELECT COUNT(*)::int AS n FROM lucky_scores');
-    if(Number(count.rows[0]?.n || 0) === 0){
+    if(!didReset && Number(count.rows[0]?.n || 0) === 0){
       const legacy = readFileScores();
       for(const row of legacy){
         await pgPool.query(
@@ -104,20 +131,22 @@ dbReady = initPostgres();
 
 async function getRanking(playerId=''){
   await dbReady;
+  const id=cleanPlayerId(playerId);
   if(pgPool){
-    const { rows } = await pgPool.query(`SELECT player_id AS "playerId", name, score::text AS score, stage, kills, time, games FROM lucky_scores ORDER BY score DESC, stage DESC, kills DESC, time ASC`);
-    const ranking = rows.map(normalizeScore);
+    const { rows } = await pgPool.query(`SELECT player_id AS "playerId", name, score::text AS score, stage, kills, time, games FROM lucky_scores`);
+    const ranking = rows.map(normalizeScore).sort(compareScores);
     const ranked = rankedRows(ranking);
-    const idx = cleanPlayerId(playerId) ? ranking.findIndex(x => x.playerId === cleanPlayerId(playerId)) : -1;
-    const mine = idx >= 0 ? ranking[idx] : null;
-    return { ranking: ranked.slice(0,100), totalPlayers: ranking.length, myRank: idx >= 0 ? idx + 1 : null, myBest: mine ? {name:mine.name,score:mine.score,stage:mine.stage,kills:mine.kills,games:mine.games,time:mine.time} : null, updatedAt: Date.now() };
+    const idx = id ? ranked.findIndex(x => x.playerId === id) : -1;
+    const mine = idx >= 0 ? ranked[idx] : null;
+    const around = idx >= 0 ? ranked.slice(Math.max(0,idx-2), Math.min(ranked.length,idx+3)) : [];
+    return { ranking: ranked.slice(0,100), aroundMe: around, totalPlayers: ranking.length, myRank: idx >= 0 ? ranked[idx].rank : null, myBest: mine ? {name:mine.name,score:mine.score,stage:mine.stage,kills:mine.kills,games:mine.games,time:mine.time} : null, updatedAt: Date.now(), rankingVersion:'v30' };
   }
   const ranking = sortScores(readFileScores());
   const ranked = rankedRows(ranking);
-  const id = cleanPlayerId(playerId);
-  const idx = id ? ranking.findIndex(x => x.playerId === id) : -1;
-  const mine = idx >= 0 ? ranking[idx] : null;
-  return { ranking: ranked.slice(0,100), totalPlayers: ranking.length, myRank: idx >= 0 ? idx + 1 : null, myBest: mine ? {name:mine.name,score:mine.score,stage:mine.stage,kills:mine.kills,games:mine.games,time:mine.time} : null, updatedAt: Date.now() };
+  const idx = id ? ranked.findIndex(x => x.playerId === id) : -1;
+  const mine = idx >= 0 ? ranked[idx] : null;
+  const around = idx >= 0 ? ranked.slice(Math.max(0,idx-2), Math.min(ranked.length,idx+3)) : [];
+  return { ranking: ranked.slice(0,100), aroundMe: around, totalPlayers: ranking.length, myRank: idx >= 0 ? ranked[idx].rank : null, myBest: mine ? {name:mine.name,score:mine.score,stage:mine.stage,kills:mine.kills,games:mine.games,time:mine.time} : null, updatedAt: Date.now(), rankingVersion:'v30' };
 }
 
 async function submitScore(x){
@@ -149,6 +178,7 @@ async function submitScore(x){
     }else{
       await pgPool.query(`UPDATE lucky_scores SET name=$2,games=$3,updated_at=NOW() WHERE player_id=$1`, [playerId,candidate.name,old.games+1]);
     }
+    await pgPool.query(`INSERT INTO lucky_score_history(player_id,name,score,stage,kills,played_at,is_new_best) VALUES($1,$2,$3,$4,$5,$6,$7)`, [playerId,candidate.name,candidate.score,candidate.stage,candidate.kills,candidate.time,isNewBest]);
     const d = await getRanking(playerId);
     return { ok:true, rank:d.myRank, isNewBest, previousBest:old ? {score:old.score,stage:old.stage,kills:old.kills}:null, player:d.myBest, ranking:d.ranking, totalPlayers:d.totalPlayers };
   }

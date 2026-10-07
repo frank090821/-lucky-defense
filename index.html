@@ -718,7 +718,7 @@ function selectCard(n,level=1){
    if(session===gameSessionId&&selected&&selected.name===item.name&&selected.level===item.level){selected=null;renderInventory();updateUI()}
  },6000);
 }
-function updateUI(){const p=stagePower();document.getElementById('stage').textContent=stage;document.getElementById('score').textContent=score.toLocaleString();document.getElementById('gold').textContent=gold.toLocaleString();document.getElementById('hp').textContent=hp;document.getElementById('cost').textContent=cost();document.getElementById('enemyCount').textContent=enemies.length+' / '+waveTarget;document.getElementById('threat').textContent=p.toFixed(1)+'× · '+threatTitle();const mi=mapIndexForStage(stage),m=currentMap();document.getElementById('mapName').textContent='🗺️ MAP '+(mi+1)+' · '+m.name;document.getElementById('mapRange').textContent=(mi*10+1)+'~'+(mi+1)*10;document.getElementById('mapProgress').style.width=(stage===0?0:(((stage-1)%10+1)/10*100))+'%';document.getElementById('mapSub').textContent=stage>=101?'101스테이지부터 1번 맵 → 2번 맵 → … 순환 중 · 길/기지는 고정 · 적 난이도는 계속 상승':'100스테이지까지 10개 맵 · 10스테이지마다 배경 전환 · 길/기지는 고정 · 스테이지가 오를수록 적 강화';const si=document.getElementById('selectedInfo');if(selected){const d=T[selected.name];si.textContent=`설치: ${TKR[selected.name]||selected.name} · ${rarityKR[d.rarity]} · Lv.${selected.level} · 맵을 클릭해 설치`;si.hidden=false}else if(selectedTower){const d=T[selectedTower.name];const dmg=Math.round(d.damage*(1+(selectedTower.level-1)*.28));si.textContent=`🎯 ${TKR[selectedTower.name]||selectedTower.name} · ${rarityKR[d.rarity]} · Lv.${selectedTower.level} · 공격 ${dmg} · 사거리 ${d.range} · 쿨 ${d.cool}s`;si.hidden=false}else{si.textContent='';si.hidden=true}updateButtons()}
+function updateUI(){syncMapBGM();const p=stagePower();document.getElementById('stage').textContent=stage;document.getElementById('score').textContent=score.toLocaleString();document.getElementById('gold').textContent=gold.toLocaleString();document.getElementById('hp').textContent=hp;document.getElementById('cost').textContent=cost();document.getElementById('enemyCount').textContent=enemies.length+' / '+waveTarget;document.getElementById('threat').textContent=p.toFixed(1)+'× · '+threatTitle();const mi=mapIndexForStage(stage),m=currentMap();document.getElementById('mapName').textContent='🗺️ MAP '+(mi+1)+' · '+m.name;document.getElementById('mapRange').textContent=(mi*10+1)+'~'+(mi+1)*10;document.getElementById('mapProgress').style.width=(stage===0?0:(((stage-1)%10+1)/10*100))+'%';document.getElementById('mapSub').textContent=stage>=101?'101스테이지부터 1번 맵 → 2번 맵 → … 순환 중 · 길/기지는 고정 · 적 난이도는 계속 상승':'100스테이지까지 10개 맵 · 10스테이지마다 배경 전환 · 길/기지는 고정 · 스테이지가 오를수록 적 강화';const si=document.getElementById('selectedInfo');if(selected){const d=T[selected.name];si.textContent=`설치: ${TKR[selected.name]||selected.name} · ${rarityKR[d.rarity]} · Lv.${selected.level} · 맵을 클릭해 설치`;si.hidden=false}else if(selectedTower){const d=T[selectedTower.name];const dmg=Math.round(d.damage*(1+(selectedTower.level-1)*.28));si.textContent=`🎯 ${TKR[selectedTower.name]||selectedTower.name} · ${rarityKR[d.rarity]} · Lv.${selectedTower.level} · 공격 ${dmg} · 사거리 ${d.range} · 쿨 ${d.cool}s`;si.hidden=false}else{si.textContent='';si.hidden=true}updateButtons()}
 let modalPausedGame=false;
 function openModal(title,body){document.getElementById('modalTitle').textContent=title;document.getElementById('modalBody').innerHTML=body;document.getElementById('modal').hidden=false;if(running&&!paused){paused=true;modalPausedGame=true;updateButtons();}}
 function closeModal(){document.getElementById('modal').hidden=true;if(modalPausedGame&&running){paused=false;modalPausedGame=false;updateButtons();}}
@@ -732,7 +732,7 @@ function renderMiniRanking(data){const rows=data.ranking||[],box=document.getEle
 async function fetchRanking(){const r=await fetch('/api/ranking?playerId='+encodeURIComponent(PLAYER_ID)).then(x=>{if(!x.ok)throw new Error('rank');return x.json()});renderMiniRanking(r);return r}
 async function openRank(){openModal('🏆 LUCKY DEFENSE 서버 랭킹','<div class="rankEmpty">랭킹 데이터를 불러오는 중...</div>');try{const d=await fetchRanking();const rows=d.ranking||[];const top=[rows[1],rows[0],rows[2]].filter(Boolean);const podium=top.length?top.map((s,j)=>{const actual=j===0?1:j===1?0:2;return {s,actual}}).sort((a,b)=>a.actual-b.actual).map(({s,actual})=>`<div class="rankPodium ${actual===0?'first':actual===1?'second':'third'}"><div class="rankMedal">${rankMedal(actual)}</div><div class="place">#${actual+1}</div><div class="pname">${escapeHtml(s.name)}${s.playerId===PLAYER_ID?' · YOU':''}</div><div class="pscore">${Number(s.score).toLocaleString()}</div><div class="pmeta">${s.stage} STAGE · ${Number(s.kills).toLocaleString()} KILL</div></div>`).join(''):'<div class="rankEmpty">아직 기록이 없습니다.</div>';
 const my=d.myBest;const summary=`<div class="rankSummary"><div class="rankStat"><span>내 순위</span><b>${d.myRank?'#'+d.myRank:'-'}</b></div><div class="rankStat"><span>내 최고 점수</span><b>${my?Number(my.score).toLocaleString():'-'}</b></div><div class="rankStat"><span>최고 스테이지</span><b>${my?my.stage:'-'}</b></div><div class="rankStat"><span>플레이 횟수</span><b>${my?my.games:0}</b></div></div>`;
-const body=`<div class="rankHero">${podium}</div>${summary}<div class="rankFilter"><span class="rankTag">🏆 TOP 100</span><span class="rankTag">LIVE SERVER</span><button class="rankRefresh" onclick="openRank()">↻ 새로고침</button></div><div class="rankTable"><div class="rankTableHead"><span>순위</span><span>플레이어</span><span>점수</span><span>스테이지</span><span>킬</span></div>${rows.length?rows.map((s,i)=>`<div class="rankTableRow ${s.playerId===PLAYER_ID?'me':''}"><span class="rnum">${rankMedal(i)||i+1}</span><span class="rname">${escapeHtml(s.name)}${s.playerId===PLAYER_ID?' <b>· YOU</b>':''}<small>${rankTime(s.time)} · ${s.games||1}회 플레이</small></span><span class="rscore">${Number(s.score).toLocaleString()}</span><span class="rmeta">${s.stage}</span><span class="rmeta">${Number(s.kills).toLocaleString()}</span></div>`).join(''):'<div class="rankEmpty">아직 기록이 없습니다.</div>'}</div><div class="rankModalFoot"><span>동일 플레이어는 최고 기록 1개만 표시됩니다.</span><span>${d.totalPlayers||0}명 등록</span></div>`;document.getElementById('modalBody').innerHTML=body}catch(e){document.getElementById('modalBody').innerHTML='<div class="rankEmpty">랭킹 서버에 연결할 수 없습니다.<br>게임 서버가 실행 중인지 확인해주세요.</div>'}}
+const body=`<div class="rankHero">${podium}</div>${summary}<div class="rankFilter"><span class="rankTag">🏆 TOP 100</span><span class="rankTag">LIVE SERVER</span><button class="rankRefresh" onclick="openRank()">↻ 새로고침</button></div><div class="rankTable"><div class="rankTableHead"><span>순위</span><span>플레이어</span><span>점수</span><span>스테이지</span><span>킬</span></div>${rows.length?rows.map((s,i)=>`<div class="rankTableRow ${s.playerId===PLAYER_ID?'me':''}"><span class="rnum">${rankMedal(i)||i+1}</span><span class="rname">${escapeHtml(s.name)}${s.playerId===PLAYER_ID?' <b>· YOU</b>':''}<small>${rankTime(s.time)} · ${s.games||1}회 플레이</small></span><span class="rscore">${Number(s.score).toLocaleString()}</span><span class="rmeta">${s.stage}</span><span class="rmeta">${Number(s.kills).toLocaleString()}</span></div>`).join(''):'<div class="rankEmpty">아직 기록이 없습니다.</div>'}</div><div class="rankModalFoot"><span>동일 플레이어는 최고 기록 1개만 표시됩니다 · 점수 → 스테이지 → 킬 → 기록 시각 순으로 순위를 계산합니다.</span><span>${d.totalPlayers||0}명 등록 · 서버 ${escapeHtml(d.rankingVersion||'')}</span></div>`;document.getElementById('modalBody').innerHTML=body}catch(e){document.getElementById('modalBody').innerHTML='<div class="rankEmpty">랭킹 서버에 연결할 수 없습니다.<br>게임 서버가 실행 중인지 확인해주세요.</div>'}}
 let scoreSubmitting=false;
 async function submitScore(){
   if(scoreSubmitting)return;
@@ -745,7 +745,7 @@ async function submitScore(){
     if(!response.ok || !r.ok) throw new Error(r.error||`점수 등록 실패 (${response.status})`);
     notify(r.isNewBest?'🏆 최고 기록 갱신! 현재 #'+r.rank+'위':'📊 기록 저장 완료 · 현재 #'+r.rank+'위');
     renderMiniRanking(r);
-    safeSet('lucky_best',JSON.stringify({...payload,rank:r.rank}));
+    safeSet('lucky_best',JSON.stringify({...payload,rank:r.rank,serverScore:r.player?.score,serverStage:r.player?.stage,serverKills:r.player?.kills,serverUpdatedAt:Date.now()}));
   }catch(e){
     console.error('submitScore failed:',e,payload);
     safeSet('lucky_best',JSON.stringify(payload));
@@ -780,41 +780,32 @@ if(typeof window!=='undefined'&&window.addEventListener){
 </script><button id="bgmToggle" type="button">🎵 BGM ON</button>
 <script id="lucky-v28-enhancements">
 (() => {
-  // ----- BGM -----
-  const bgm = new Audio('/bgm_lucky_defense.wav');
-  bgm.loop = true;
-  bgm.volume = 0.22;
-  let bgmOn = true;
-
-  async function startBGM(){
-    if(!bgmOn) return;
-    try { await bgm.play(); } catch(_) {}
+  // ----- MAP BGM -----
+  const MAP_BGM_FILES=[
+    '/01_plains.wav','/02_lava.wav','/03_ice.wav','/04_desert.wav','/05_forest.wav',
+    '/06_sky.wav','/07_crystal.wav','/08_neon.wav','/09_abyss.wav','/10_final.wav'
+  ];
+  const mapBGM=MAP_BGM_FILES.map(src=>{const a=new Audio(src);a.loop=true;a.volume=.20;return a;});
+  let bgmOn=true, currentBGMIndex=-1;
+  async function syncMapBGM(force=false){
+    const mi=Math.max(0,Math.min(mapBGM.length-1,mapIndexForStage(stage)));
+    if(!force && mi===currentBGMIndex)return;
+    currentBGMIndex=mi;
+    for(const a of mapBGM){a.pause();a.currentTime=0;}
+    if(bgmOn){try{await mapBGM[mi].play()}catch(_){} }
   }
-  window.startBGM = startBGM;
-
-  const bgmBtn = document.getElementById('bgmToggle');
-  function syncBGMButton(){
-    if(bgmBtn) bgmBtn.textContent = bgmOn ? '🎵 BGM ON' : '🔇 BGM OFF';
-  }
+  window.startBGM=()=>syncMapBGM(true);
+  const bgmBtn=document.getElementById('bgmToggle');
+  function syncBGMButton(){if(bgmBtn)bgmBtn.textContent=bgmOn?'🎵 BGM ON':'🔇 BGM OFF'}
   if(bgmBtn){
-    bgmBtn.addEventListener('click', async () => {
-      bgmOn = !bgmOn;
-      if(bgmOn) await startBGM();
-      else bgm.pause();
+    bgmBtn.addEventListener('click',async()=>{
+      bgmOn=!bgmOn;
+      if(bgmOn)await syncMapBGM(true);else for(const a of mapBGM)a.pause();
       syncBGMButton();
     });
     syncBGMButton();
   }
-  document.addEventListener('click', () => startBGM(), {once:true});
-
-  // Start music on the actual game-start action as well.
-  const originalStartGame = window.startGame;
-  if(typeof originalStartGame === 'function'){
-    window.startGame = function(){
-      startBGM();
-      return originalStartGame.apply(this, arguments);
-    };
-  }
+  document.addEventListener('click',()=>syncMapBGM(true),{once:true});
 
   // ----- Shared drawing helpers -----
   function poly(points, fill, stroke, width=1){
