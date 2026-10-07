@@ -58,7 +58,7 @@ const FIXED_BASE=[900,430];
 let routes=MAPS[0].routes.map(r=>r.map(p=>[...p]));
 let basePos=[...FIXED_BASE];
 let activeMapIndex=-1;
-let running=false,paused=false,autoWave=true,autoFusion=true,sellMode=false,speed=1,stage=0,score=0,gold=5500,hp=20,kills=0,last=0,spawnTimer=0,waveClearedTimer=0,selected=null,selectedTower=null,enemies=[],towers=[],shots=[],particles=[],collection=[],milestones=new Set(),gameOverSent=false,waveTarget=0,spawnedThisWave=0,waveComplete=false,fusionBusy=false,spawnFx=[],fusionFx=[],lastAutoFusion=0,bossBattleElapsed=0,bossStallWarned=false;
+let running=false,paused=false,autoWave=true,autoFusion=true,sellMode=false,speed=1,stage=0,score=0,gold=5500,hp=20,kills=0,last=0,spawnTimer=0,waveClearedTimer=0,selected=null,selectedTower=null,enemies=[],towers=[],shots=[],particles=[],collection=[],milestones=new Set(),gameOverSent=false,waveTarget=0,spawnedThisWave=0,waveComplete=false,fusionBusy=false,spawnFx=[],fusionFx=[],lastAutoFusion=0,bossBattleElapsed=0,bossStallWarned=false,hpFlash=0,hpFlashText=0;
 const WAVE_ENEMY_CAP=250; let uiTimer=0; let gameSessionId=0; let runtimeErrorShownAt=0;
 const BOSS_ABILITIES={demon:{name:'지옥 화염',interval:6},golem:{name:'철벽 방어',interval:7},beast:{name:'광폭 돌진',interval:5.5},titan:{name:'대지 충격파',interval:7},lich:{name:'시간 동결',interval:8},dragonboss:{name:'용의 숨결',interval:6},overlord:{name:'지배의 명령',interval:7},abyssTitan:{name:'심연의 방벽',interval:8},executionerBoss:{name:'처형 선고',interval:5},worldEater:{name:'세계 붕괴',interval:9},chronolord:{name:'시간 정지',interval:8},starseeker:{name:'성좌 폭주',interval:7},abyssDragon:{name:'심연의 숨결',interval:6}};
 function mapIndexForStage(n=stage){return n<=0?0:((Math.floor((n-1)/10))%MAPS.length)}
@@ -362,6 +362,7 @@ function sanitizeState(){
 }
 function update(dt){
  if(!running||paused)return;
+ hpFlash=Math.max(0,hpFlash-dt); hpFlashText=Math.max(0,hpFlashText-dt);
  sanitizeState();
  dt=Math.min(.05,Math.max(0,Number(dt)||0))*speed;
  const liveBoss=enemies.find(e=>e.boss&&e.hp>0);
@@ -403,7 +404,7 @@ function update(dt){
   let p=e.route[e.idx+1];
   if(!p){e.hp=0;continue}
   const dx=p[0]-e.x,dy=p[1]-e.y,d=Math.hypot(dx,dy);
-  if(d<3){e.idx++;if(e.idx>=e.route.length-1){hp-=e.leakDamage;e.hp=0;continue}}
+  if(d<3){e.idx++;if(e.idx>=e.route.length-1){const oldHp=hp;hp=Math.max(0,hp-e.leakDamage);hpFlash=0.65;hpFlashText=0.65;notify('💥 기지 피해 -'+(oldHp-hp)+' HP');e.hp=0;continue}}
   else{let sp=e.speed*(e.slow>0?.55:1);if(e.kind==='berserker'&&e.hp<e.max*.45)sp*=1.35;if(e.kind==='reaper')sp*=1.25;if(e.kind==='executionerBoss')sp*=1.35;if(e.kind==='worldbreaker'&&e.hp<e.max*.5)sp*=1.22;if(e.chargeTimer>0)sp*=1.75;if(e.rageTimer>0)sp*=1.25;e.angle=Math.atan2(dy,dx);e.x+=dx/d*sp*60*dt;e.y+=dy/d*sp*60*dt}
  }catch(err){stabilityError(err,'enemy update');enemies.splice(ei,1)}}
  for(let ti=towers.length-1;ti>=0;ti--){const t=towers[ti];try{t.stun=Math.max(0,(t.stun||0)-dt);t.slow=Math.max(0,(t.slow||0)-dt);const rate=t.stun>0?0:(t.slow>0?.45:1);t.cd-=dt*rate;if(t.cd<=0&&t.stun<=0){towerAttack(t);t.cd=T[t.name].cool}}catch(err){stabilityError(err,'tower update');if(selectedTower===t)selectedTower=null;towers.splice(ti,1)}}
@@ -459,6 +460,8 @@ function draw(){
  ctx.fillStyle='#0a1a16';ctx.strokeStyle='#6ff0ad';ctx.lineWidth=2;roundRect(-27,-30,54,60,10);ctx.fill();ctx.stroke();
  ctx.fillStyle='#35d07f';ctx.beginPath();ctx.moveTo(-20,22);ctx.lineTo(-15,-12);ctx.lineTo(0,-24);ctx.lineTo(15,-12);ctx.lineTo(20,22);ctx.closePath();ctx.fill();
  ctx.fillStyle='#0b281b';ctx.fillRect(-6,5,12,17);ctx.fillStyle='#d8ffe8';ctx.font='bold 9px system-ui';ctx.textAlign='center';ctx.fillText('BASE',0,-34);ctx.restore();
+ // 기지 체력 HUD를 맵 위에도 크게 표시
+ {const ratio=Math.max(0,Math.min(1,hp/20));const bx=760,by=18,bw=168,bh=32;ctx.save();ctx.fillStyle='#07101ce8';ctx.strokeStyle=hp<=5?'#fb4d5d':hp<=10?'#facc15':'#55e58a';ctx.lineWidth=2;roundRect(bx,by,bw,bh,9);ctx.fill();ctx.stroke();ctx.fillStyle='#111827';roundRect(bx+8,by+18,bw-16,8,4);ctx.fill();ctx.fillStyle=hp<=5?'#fb4d5d':hp<=10?'#facc15':'#55e58a';roundRect(bx+8,by+18,(bw-16)*ratio,8,4);ctx.fill();ctx.fillStyle='#fff';ctx.font='900 11px system-ui';ctx.textAlign='left';ctx.fillText('🏰 BASE HP',bx+9,by+13);ctx.textAlign='right';ctx.fillText(hp+' / 20',bx+bw-9,by+13);if(hpFlashText>0){ctx.globalAlpha=hpFlashText/.65;ctx.fillStyle='#fb4d5d';ctx.font='900 15px system-ui';ctx.textAlign='center';ctx.fillText('− 피해!',bx+bw/2,by+55);}ctx.restore();}
  // towers
  for(const t of towers){try{drawTower(t)}catch(err){stabilityError(err,'tower render')}}
  // fusion FX
@@ -661,7 +664,7 @@ function drawEnemy(e){
  else if(e.stealth>0){ctx.globalAlpha=1;ctx.fillStyle='#a78bfa';ctx.font='900 8px system-ui';ctx.textAlign='center';ctx.fillText('STEALTH',0,-r-22)}
  if(e.elite||e.boss){ctx.globalAlpha=.2+.08*Math.sin(now*6+e.x*.01);ctx.strokeStyle=col;ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,r+8+3*Math.sin(now*4),0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1}
  if(e.elite){ctx.fillStyle=col;ctx.font='900 9px system-ui';ctx.textAlign='center';ctx.fillText('ELITE',0,r+25)}
- ctx.globalAlpha=1;ctx.fillStyle='#070b12';roundRect(-22,-r-15,44,6,3);ctx.fill();ctx.fillStyle=e.hp/e.max>.5?'#5ee879':e.hp/e.max>.25?'#facc15':'#fb4d5d';ctx.fillRect(-21,-r-14,42*Math.max(0,e.hp/e.max),4);if(e.boss){ctx.fillStyle='#fff';ctx.font='900 10px system-ui';ctx.textAlign='center';ctx.fillText('BOSS',0,r+14)}ctx.restore();
+ ctx.globalAlpha=1;ctx.fillStyle='#070b12';roundRect(-27,-r-17,54,9,4);ctx.fill();ctx.fillStyle=e.hp/e.max>.5?'#5ee879':e.hp/e.max>.25?'#facc15':'#fb4d5d';roundRect(-26,-r-16,52*Math.max(0,e.hp/e.max),7,3);ctx.fill();if(!e.boss&&r>=10){ctx.fillStyle='#e5edf9';ctx.font='800 8px system-ui';ctx.textAlign='center';ctx.fillText(Math.max(0,Math.ceil(e.hp)).toLocaleString(),0,-r-21);}if(e.boss){ctx.fillStyle='#fff';ctx.font='900 10px system-ui';ctx.textAlign='center';ctx.fillText('BOSS',0,r+14)}ctx.restore();
 }
 function path(r){ctx.beginPath();ctx.moveTo(...r[0]);for(const p of r.slice(1))ctx.lineTo(...p);ctx.stroke()}
 const enemyKR={normal:'일반 몬스터',fast:'빠른 몬스터',tank:'탱커',runner:'돌진병',mage:'마법사',crystal:'수정 괴물',shadow:'그림자',armored:'중갑병',slime:'슬라임',phantom:'팬텀',bomber:'폭탄병',healer:'치유병',berserker:'광전사',frost:'빙결괴물',poison:'독괴물',giant:'거대병',assassin:'암살자',necro:'망령술사',vampire:'흡혈귀',splitter:'분열괴물',shielder:'방패병',charger:'돌격괴물',summoner:'소환사',juggernaut:'저거너트',voidwalker:'공허보행자',ravager:'파괴자',reaper:'사신',colossus:'콜로서스',plaguebringer:'역병군주',annihilator:'소멸병기',dreadknight:'공포기사',worldbreaker:'월드브레이커',demon:'악마 보스',golem:'골렘 보스',beast:'야수 보스',titan:'타이탄 보스',lich:'리치 보스',dragonboss:'고대 드래곤',overlord:'오버로드',abyssTitan:'심연의 타이탄',executionerBoss:'처형자 보스',worldEater:'세계포식자',chronolord:'시간의 군주',starseeker:'성좌 추적자',abyssDragon:'심연룡'};
